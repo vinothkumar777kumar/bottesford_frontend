@@ -1,0 +1,179 @@
+<div>
+    <div class="page-header">
+      <div class="page-block">
+        <div class="row align-items-center">
+          <div class="col-md-12">
+            <div class="page-header-title">
+              <h5 class="m-b-10">Match Results</h5>
+            </div>
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a [routerLink]="['/dashboard/']"><i class="feather icon-home"></i></a>
+                <!-- <a [routerLink]="['/dashboard/default/']" *ngIf="type === 'theme1'">Home</a> -->
+              </li>
+              <!-- <ng-container *ngFor="let breadcrumb of navigationList"> -->
+              <!-- <li class="breadcrumb-item"><a [routerLink]="['/team-list']">Match</a></li> -->
+              <li class="breadcrumb-item"><a href="javascript:void(0)">{{title}}</a></li>
+              <!-- </ng-container> -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="row">
+    <div class="col-xl-12">
+      <div class="card" [ngClass]="cardClass" [@cardRemove]="cardRemove" #toAnimate>
+        <!-- animates animatesInitMode="show" [animatesOnInit]="{useVisibility: false, disabled: true}" -->
+        <div class="card-header" [ngClass]="headerClass">
+          <h5>{{title}}</h5>
+          <div class="card-header-right">
+            <div class="btn-group card-option">
+              <button type="button" class="btn btn-sm btn-info" [routerLink]="['/games-result']">
+                <i class="fa fa-times"></i>
+              </button>
+            </div>
+          </div>
+          
+        </div>
+        <div>
+          <div class="card-block">
+            <form [formGroup]="addMatchResultForm">
+                <input type="hidden" name="id" formControlName="id">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="team_one">Team One</label>
+                      <select class="form-control" id="team_one" name="team_one" formControlName="team_one"
+                        [ngClass]="{ 'is-invalid': submitted && f.team_one.errors }">
+                        <option value="" selected>Select Team</option>
+                        <option *ngFor="let t of teamsarray" [value]="t.team_one">{{t.team_one}}</option>
+                      </select>
+                      <div *ngIf="submitted && f.team_one.errors" class="invalid-feedback">
+                        <div *ngIf="f.team_one.errors.required">Team One is required</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6" *ngIf="teamoneimageinputshow">
+                    <div class="form-group">
+                      <label for="team_one_image">Team One Image</label>
+                      <input type="file" class="form-control" id="team_one_image" name="team_one_image"
+                        formControlName="team_one_image" [ngClass]="{ 'is-invalid': submitted && f.team_one_image.errors }"
+                        (change)="fileProgress($event,'team_one')" />
+                      <div *ngIf="submitted && f.team_one_image.errors" class="invalid-feedback">
+                        <div *ngIf="f.team_one_image.errors.required">Team One Image is required</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6" *ngIf="teamoneimageshow">
+                    <div class="form-group">
+                      <label for="player_image">Team One Image</label><br>
+                      <img src="{{teamoneimage_url}}" alt="image"
+                                    style="height: 100px;width: 100px;border-radius: 50%;" onerror="this.onerror=null;this.src='assets/img/smd/logo.png';"/>
+                                <button class="delete-entry btn btn-danger btn-sm" style="cursor: pointer;"
+                                    (click)="deletematchImage('teamoneimage')">
+                                    Delete</button>
+                    </div>
+                  </div>
+                  <div class="col-md-6" >
+                    <div class="form-group">
+                      <label for="team_two">Select Team Two</label>
+                      <select class="form-control" id="team_two" name="team_two" formControlName="team_two"
+                        [ngClass]="{ 'is-invalid': submitted && f.team_two.errors }">
+                        <option value="" selected>Select Team</option>
+                        <option *ngFor="let t of teamsarray" [value]="t.team_two">{{t.team_two}}</option>
+                      </select>
+                      <div *ngIf="submitted && f.team_two.errors" class="invalid-feedback">
+                        <div *ngIf="f.team_two.errors.required">Team Two is required</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6" *ngIf="teamtwoimageinputshow">
+                    <div class="form-group">
+                      <label for="team_two_image">Team Two Image</label>
+                      <input type="file" class="form-control" id="team_two_image" name="team_two_image"
+                        formControlName="team_two_image" [ngClass]="{ 'is-invalid': submitted && f.team_two_image.errors }"
+                        (change)="fileProgress($event,'team_two')" />
+                      <div *ngIf="submitted && f.team_two_image.errors" class="invalid-feedback">
+                        <div *ngIf="f.team_two_image.errors.required">Team Two Image is required</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6" *ngIf="teamtwoimageshow">
+                    <div class="form-group">
+                      <label for="player_image">Team Two  Image</label><br>
+                      <img src="{{teamtwoimage_url}}" alt="image"
+                                    style="height: 100px;width: 100px;border-radius: 50%;" onerror="this.onerror=null;this.src='assets/img/smd/logo.png';"/>
+                                <button class="delete-entry btn btn-danger btn-sm" style="cursor: pointer;"
+                                    (click)="deletematchImage('teamtwoimage')">
+                                    Delete</button>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="match_name">Match Name</label>
+                      <input type="text" class="form-control" id="match_name" name="match_name"
+                        formControlName="match_name" [ngClass]="{ 'is-invalid': submitted && f.match_name.errors }" />
+                      <div *ngIf="submitted && f.match_name.errors" class="invalid-feedback">
+                        <div *ngIf="f.match_name.errors.required">Match Name is required</div>
+                      </div>
+                    </div>
+                  </div>
+               
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="team_one_goal">Team One Goal</label>
+                      <input type="text" class="form-control" id="team_one_goal" name="team_one_goal"
+                        formControlName="team_one_goal" [ngClass]="{ 'is-invalid': submitted && f.team_one_goal.errors }" />
+                      <div *ngIf="submitted && f.team_one_goal.errors" class="invalid-feedback">
+                        <div *ngIf="f.team_one_goal.errors.required">Team one goal is required</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="team_two_goal">Team Two Goal</label>
+                      <input type="text" class="form-control" id="team_two_goal" name="team_two_goal"
+                        formControlName="team_two_goal" [ngClass]="{ 'is-invalid': submitted && f.team_two_goal.errors }" />
+                      <div *ngIf="submitted && f.team_two_goal.errors" class="invalid-feedback">
+                        <div *ngIf="f.team_two_goal.errors.required">Team two goal is required</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="match_date">Match Date</label>
+                      <div class="input-group">
+                        <input angular-mydatepicker type="text" class="form-control" id="match_date" name="match_date"
+                          formControlName="match_date" [ngClass]="{ 'is-invalid': submitted && f.match_date.errors }"
+                          [options]="myDatePickerOptions" (dateChanged)="onDateChanged($event,'changedate')"
+                          #dp="angular-mydatepicker" disabled style="background-color: #fff;" />
+                        <div class="input-group-append">
+                          <span class="input-group-text">
+                            <a style="cursor: pointer;" class="fa fa-calendar" (click)="dp.toggleCalendar()"></a></span>
+                        </div>
+                        <div *ngIf="submitted && f.match_date.errors" class="invalid-feedback">
+                          <div *ngIf="f.match_date.errors.required">Match is required</div>
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="video_url">Video Url</label>
+                      <input type="text" class="form-control" id="video_url" name="video_url"
+                        formControlName="video_url" [ngClass]="{ 'is-invalid': submitted && f.video_url.errors }" />
+                      <div *ngIf="submitted && f.video_url.errors" class="invalid-feedback">
+                        <div *ngIf="f.video_url.errors.required">Video Url is required</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary float-right" (click)="addmatchresult()">{{submit_action}}</button>
+                <div class="clearfix"></div>
+              </form>
+          </div>
+        </div>
+        </div>
+        </div>

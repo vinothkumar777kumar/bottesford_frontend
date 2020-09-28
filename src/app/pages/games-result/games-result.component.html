@@ -1,0 +1,67 @@
+<div class="row">
+    <div class="col-xl-12">
+      <div class="card" [ngClass]="cardClass" [@cardRemove]="cardRemove" #toAnimate>
+        <!-- animates animatesInitMode="show" [animatesOnInit]="{useVisibility: false, disabled: true}" -->
+        <div class="card-header" [ngClass]="headerClass">
+          <h5>Games Result</h5>
+          <div class="card-header-right">
+            <div class="btn-group card-option">
+              <button type="button" class="btn btn-sm btn-info" [routerLink]="['/add-game-result']">
+                <i class="fa fa-plus"></i>
+              </button>
+            </div>
+          </div>
+          
+        </div>
+        <div>
+          <div class="card-block">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Team One</th>
+                    <th>Team Two</th>
+                    <th>Match Date</th>
+                    <th>Match Name</th>
+                    <th>Team One Goal</th>
+                    <th>Team Two Goal</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let r of gamesresultdata;let i = index">
+                    <th scope="row">{{i + 1}}</th>
+                    <td>{{r.team_one}}</td>
+                    <td>{{r.team_two}}</td>
+                    <td>
+                      {{r.match_date}}
+                    </td>
+                    <td>
+                      {{r.match_name}}
+                    </td>
+                    <td>
+                      {{r.team_one_goal}}
+                    </td>
+                    <td>
+                        {{r.team_two_goal}}
+                      </td>
+                    <td>
+                      <a href="javascript:void(0)" (click)="edit_game_result(r)"><i class="fa fa-edit"></i></a>
+                    </td>
+                    <td>
+                      <a href="javascript:void(0)" (click)="delete_game_result(r)"><i class="fa fa-trash"></i></a>
+                    </td>
+                  </tr>
+                  <tr *ngIf="emptygamesresultdata" style="text-align: center;">
+                    <td colspan="9">No Data Found</td>
+                  </tr>
+    
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        </div>
+        </div>

@@ -1,0 +1,91 @@
+<!-- <ngx-ui-loader></ngx-ui-loader> -->
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <form class="login100-form validate-form" [formGroup]="registerForm" >
+                <span class="login100-form-title p-b-43 " >
+                    Register
+                </span>
+                <div class="form-group">
+                    <!-- <label>Email</label> -->
+                    <input class="form-control" type="text" name="name" placeholder="Name" formControlName="name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                    <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                        <div *ngIf="f.name.errors.required">Name is required</div>
+                    </div>
+           
+                </div><br>
+                
+                <div class="form-group">
+                    <!-- <label>Email</label> -->
+                    <input class="form-control" type="text" name="email" placeholder="Email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">Email is required</div>
+                        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                    </div>
+           
+                </div><br>
+                
+                
+                <div class="form-group">
+                    <!-- <label>Password</label> -->
+                    <input class="form-control" type="password" name="pass" placeholder="Password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" autocomplete="off">
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required">Password is required</div>
+                        <!-- <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div> -->
+                        <div *ngIf="f.password.errors.pattern">password must be 8 characters, 1 upper case letter, and 1 special character</div>
+                    </div>
+                </div><br>
+
+                <div class="form-group">
+                    <!-- <label>Email</label> -->
+                    <input class="form-control" type="text" name="mobile"  placeholder="Mobile" formControlName="mobile" (keypress)="numberOnly($event)" maxlength="11" [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }">
+                    <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback">
+                        <div *ngIf="f.mobile.errors.required">Mobile is required</div>
+                    </div>
+           
+                </div><br>
+<input type="hidden" name="status" formControlName="status">
+                <!-- <div class="flex-sb-m w-full p-t-3 p-b-32">
+                    <div class="contact100-form-checkbox">
+                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                        <label class="label-checkbox100" for="ckb1">
+                            Remember me
+                        </label>
+                    </div>
+
+                    <div>
+                        <a href="#" class="txt1">
+                            Forgot Password?
+                        </a>
+                    </div>
+                </div> -->
+        
+
+                <div class="container-login100-form-btn">
+                    <button type="submit" class="login100-form-btn" (click)="register()">
+                        Register
+                    </button>
+                </div>
+                
+                <div class="text-center p-t-46 p-b-20">
+                    <span class="txt2">
+                       Already have account? <a style="color: #333333;" [routerLink]="['/login']"> Login</a>
+                    </span>
+                </div>
+
+                <!-- <div class="login100-form-social flex-c-m">
+                    <a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+
+                    <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div> -->
+            </form>
+<!-- {{registerForm.value | json}} -->
+            <div class="login100-more" style="background-image: url('assets/images/login-img5.jpg');">
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+<section class="hero-wrap hero-wrap-2" style="background-image: url('assets/images/gamesch4.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row no-gutters slider-text align-items-end justify-content-center">
+        <div class="col-md-9  pb-5 text-center">
+          <h1 class="mb-3 bread">Team Player</h1>
+          <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Team Players <i class="ion-ios-arrow-forward"></i></span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ftco-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 ">
+          <h2 class="mb-3" style="text-transform: uppercase;">{{playerdata.player_name}} - {{playerdata.position}}</h2>
+          <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, eius mollitia suscipit, quisquam doloremque distinctio perferendis et doloribus unde architecto optio laboriosam porro adipisci sapiente officiis nemo accusamus ad praesentium? Esse minima nisi et. Dolore perferendis, enim praesentium omnis, iste doloremque quia officia optio deserunt molestiae voluptates soluta architecto tempora.</p> -->
+          <p>
+            <img src="{{player_image_api + playerdata.player_image}}" alt="" class="img-fluid">
+          </p>
+          <p>{{playerdata.description}}</p>
+
+        </div> <!-- .col-md-8 -->
+        <div class="col-lg-4 sidebar ">
+          <div class="sidebar-box ">
+            <div class="categories">
+              <h3 class="heading-name">Biography</h3>
+              <li><a href="javascript:void(0)">DATE OF BIRTH <span>{{playerdata.dateofbirth}}</span></a></li>
+              <li><a href="javascript:void(0)">HEIGHT <span>{{playerdata.player_height}} cm</span></a></li>
+              <li><a href="javascript:void(0)">SIGNED <span>{{playerdata.signed_date}}</span></a></li>
+              <li><a href="javascript:void(0)">COUNTRY <span>{{playerdata.country}}</span></a></li>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section> <!-- .section -->
+
+  <section class="ftco-subscribe img" style="background-image: url(assets/images/bg_2.jpg);">
+    <div class="overlay">
+      <div class="container">
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-9 text-wrap text-center heading-section heading-section-white ">
+            <h2>Subcribe to our upcoming match</h2>
+            <div class="row d-flex justify-content-center mt-4 mb-4">
+              <div class="col-md-10">
+                <form action="#" class="subscribe-form">
+                  <div class="form-group d-flex">
+                    <input type="text" class="form-control" placeholder="Enter email address">
+                    <input type="submit" value="Subscribe" class="submit px-3">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

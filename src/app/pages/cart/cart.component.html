@@ -1,0 +1,110 @@
+<section class="hero-wrap hero-wrap-2" style="background-image: url('assets/images/gamesch4.jpg');"
+  data-stellar-background-ratio="0.5">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text align-items-end justify-content-center">
+      <div class="col-md-9  pb-5 text-center">
+        <h1 class="mb-3 bread">Cart</h1>
+        <p class="breadcrumbs"><span class="mr-2"><a href="javascript:void(0)" [routerLink]="['home']">Home <i
+                class="ion-ios-arrow-forward"></i></a></span> <span>Cart <i
+              class="ion-ios-arrow-forward"></i></span></p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="ftco-section">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-12">
+              <div class="heading-section ">
+                  <!-- <span class="subheading">Buy Ticket</span> -->
+                  <h2 class="mb-4">cart Details</h2>
+              </div>
+             
+              <div class="row" *ngFor="let c of cartdata">
+                  <div class="col-lg-6">
+                      <div class="scoreboard scoreboard-2 slash">
+                          <div class="divider text-center mb-4"><span>{{c.matchdate}} {{c.match_name}}</span></div>
+                          <div class="sport-team-wrap">
+                              <span class="vs">vs</span>
+                              <div class="d-sm-flex mb-4">
+                                  <div class="sport-team d-flex align-items-center">
+                                      <div class="img logo" [style.background]="'url('+ c.team_one_image +')'" [style.backgroundSize]="'cover'"></div>
+                                      <div class="text-center px-1 px-md-3 desc">
+                                          <!-- <h3 class="score win"><span>12</span></h3> -->
+                                          <h4 class="team-name">{{c.team_one}}</h4>
+                                      </div>
+                                  </div>
+                                  <div class="sport-team d-flex align-items-center">
+                                      <div class="img logo order-sm-last" [style.background]="'url('+ c.team_two_image +')'" [style.backgroundSize]="'cover'">
+                                      </div>
+                                      <div class="text-center px-1 px-md-3 desc">
+                                          <!-- <h3 class="score lost"><span>8</span></h3> -->
+                                          <h4 class="team-name">{{c.team_two}}</h4>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <!-- <div class="text-center">
+                              <p class="mb-0"><a href="javascript:void(0)" (click)="buyticket(m)" class="btn btn-black">Buy Ticket</a></p>
+                          </div> -->
+                      </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="sidebar-box">
+                      <h2 class="mb-4">Ticket Deatils</h2>
+                      <table class="table table-league">
+                        <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Details</th>
+                            <!-- <th>QR Code</th> -->
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Ticket No</td>
+                            <td>{{c.ticket}}</td>
+                          </tr>
+                          <tr>
+                            <td>Ticket Price</td>
+                            <td>£ {{c.ticket_price}}</td>
+                          </tr>
+                          
+                        </tbody>
+                      </table>
+                      <div class="row">
+                        <div class="col-lg-6 text-center">
+                      <ngx-qrcode
+                            [elementType]="elementType"
+                            [errorCorrectionLevel]="correctionLevel"
+                            [value]="value"
+                            alt="Demo QR Code"
+                            cssClass="aclass" id="qrticket"></ngx-qrcode>
+                          </div>
+                          <div class="col-lg-6 text-center" style="margin: auto;">
+                            <a href="javascript:void(0)" (click)="downloadqr()" class="btn btn-black">Download QR Code</a>
+                          </div>
+                          </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-12 text-right">
+                    <div class="text-center">
+                      <p class="mb-0">
+                        <a href="javascript:void(0)" (click)="checkout()" class="btn btn-black">Checkout</a>
+                      </p>
+                  </div>
+                  
+                  </div>
+              </div>
+             
+              <div class="row" *ngIf="nocartdata">
+                <div class="col-lg-12 text-center">
+                <p>No Cart Details</p>
+              </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+</section>
