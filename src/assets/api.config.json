@@ -1,6 +1,6 @@
 {
-    "apiurl":"https://friendly-poincare-f2fa8f.netlify.app/api/",
-    "player_image_url":"https://friendly-poincare-f2fa8f.netlify.app/uploads/",
-    "match_image_url":"https://friendly-poincare-f2fa8f.netlify.app/uploads/match/"
+    "apiurl":"http://192.168.43.55/bottesford_backend/api/",
+    "player_image_url":"http://192.168.43.55/bottesford_backend/uploads/",
+    "match_image_url":"http://192.168.43.55/bottesford_backend/uploads/match/"
     }
     
