@@ -20,6 +20,9 @@ declare global {
 export class HomeComponent implements OnInit {
 
   emptyteams:boolean = false;
+  isnextmatch:boolean = false;
+  isgameschedule:boolean = false;
+  isnextmatchshow:boolean = false;
   teamsarray = [];
   match_image_api:any;
   nextmatchdata = {
@@ -88,18 +91,19 @@ OurteamSlideOptions = { items: 5, dots: true, nav: false };
     if(data == ''){
 this.emptyteams = true;
     }else{
-
       data.forEach((m) => {
         let cd = moment().format('YYYY-MM-DD');
         let sd = moment(m.match_date,'DD-MM-YYYY').format('YYYY-MM-DD');
-        if(moment(sd).isAfter(cd) == true){
+        if(moment(sd).isSameOrAfter(cd) == true){
       this.matchdata.push({id:m.id,match_date:m.match_date,match_name:m.match_name,round:m.round,team_one:m.team_one,
         team_one_image:this.match_image_api+''+m.team_one_image,team_two:m.team_two,team_two_image:this.match_image_api+''+m.team_two_image})
       }
       });
      
-      console.log(this.matchdata);
-      
+      if(this.matchdata.length != 0){ 
+        this.isnextmatchshow = true;
+        this.isnextmatch = true;
+        this.isgameschedule = true; 
      let next = this.matchdata[0];
      this.nextmatchdata.team_one_image =  next.team_one_image;
      this.nextmatchdata.team_one = next.team_one;
@@ -114,7 +118,12 @@ this.emptyteams = true;
       this.makeTimer(new Date(ded+' '+ '00' +':'+'00'));
           },1000)
     //  console.log(moment(ded));
+    }else{
+      this.isnextmatch = false;
+      this.isgameschedule = false;
+      this.isnextmatchshow = false;
     }
+  }
             }
     },error => {
       console.log(error['status']);

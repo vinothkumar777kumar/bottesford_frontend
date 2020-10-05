@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <section class="ftco-section ftco-no-pt ftco-no-pb">
+    <section class="ftco-section ftco-no-pt ftco-no-pb" *ngIf="isnextmatch">
     	<div class="container-fluid px-0">
 	    	<div class="row">
 					<div class="col-md-12">
@@ -114,7 +114,7 @@
 			</div>
 		</section>
 
-		<section class="ftco-section ftco-game-schedule ftco-no-pt">
+		<section class="ftco-section ftco-game-schedule ftco-no-pt" *ngIf="isgameschedule">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12 heading-section text-center  mb-4">
@@ -176,7 +176,7 @@
     	</div>
     </section>
 
-    <section class="ftco-section ftco-game-schedule">
+    <section class="ftco-section ftco-game-schedule" *ngIf="isnextmatchshow">
     	<div class="container">
     		<div class="row justify-content-center pb-5">
           <div class="col-md-6 heading-section text-center ">

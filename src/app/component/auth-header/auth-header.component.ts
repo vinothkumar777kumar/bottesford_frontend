@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { TeamService } from 'src/app/dataservice/team.service';
 
@@ -13,6 +13,7 @@ export class AuthHeaderComponent implements OnInit {
   cartdata = [];
   cartlength = 0;
   teamsarray = [];
+  mySubscription: any;
   constructor(private tmsv:TeamService,private toastr: ToastrService,private router: Router) { 
     let cart_session_data = JSON.parse(sessionStorage.getItem('cartdata'));
     this.getteams_data();
@@ -23,6 +24,16 @@ export class AuthHeaderComponent implements OnInit {
         team_two:d.team_two,team_two_img:d.team_two_img,ticket:d.ticket,ticket_price:d.ticket_price})
     });
   }
+  this.router.routeReuseStrategy.shouldReuseRoute = function () {
+    return false;
+  };
+  
+  this.mySubscription = this.router.events.subscribe((event) => {
+    if (event instanceof NavigationEnd) {
+      // Trick the Router into believing it's last link wasn't previously loaded
+      this.router.navigated = false;
+    }
+  });
   }
 
   ngOnInit(): void {
@@ -61,6 +72,12 @@ export class AuthHeaderComponent implements OnInit {
       }
   };
 this.router.navigate(['/team-players'], navigationExtras);
+  }
+
+  ngOnDestroy() {
+    if (this.mySubscription) {
+      this.mySubscription.unsubscribe();
+    }
   }
 
 }
