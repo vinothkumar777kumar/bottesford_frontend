@@ -13,94 +13,31 @@
    <section class="ftco-section">
     <div class="container">
       <div class="row d-flex">
-        <div class="col-md-6 col-lg-3 ">
-            <div class="blog-entry justify-content-end">
-            <a href="blog-single.html" class="block-20" style="background-image: url('assets/images/gameschd1.jpg');">
+        <div class="col-md-6 col-lg-3" *ngFor="let b of blogarray">
+            <div class="blog-entry justify-content-end parent">
+            <a href="javascript:void(0)" (click)="singleblog(b)" class="block-20 child" [style.background]="'url('+ b.blog_image +')'" [style.backgroundSize]="'cover'">
             </a>
             <div class="text mt-3 float-right d-block">
                 <div class="d-flex align-items-center p-2 pr-3 mb-4 topp">
                     <div class="one">
-                        <span class="day mr-1">29</span>
+                        <span class="day mr-1">{{b.date}}</span>
                     </div>
                     <div class="two">
-                        <span class="yr">2019</span>
-                        <span class="mos">May</span>
+                        <span class="yr">{{b.year}}</span>
+                        <span class="mos">{{b.month}}</span>
                     </div>
                 </div>
-              <h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
+              <h3 class="heading"><a href="#">{{b.title}}</a></h3>
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-lg-3 ">
-            <div class="blog-entry justify-content-end">
-            <a href="blog-single.html" class="block-20" style="background-image: url('assets/images/gameschd2.jpg');">
-            </a>
-            <div class="text mt-3 float-right d-block">
-                <div class="d-flex align-items-center p-2 pr-3 mb-4 topp">
-                    <div class="one">
-                        <span class="day mr-1">29</span>
-                    </div>
-                    <div class="two">
-                        <span class="yr">2019</span>
-                        <span class="mos">May</span>
-                    </div>
-                </div>
-              <h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3 ">
-            <div class="blog-entry">
-            <a href="blog-single.html" class="block-20" style="background-image: url('assets/images/gamesch3.jpg');">
-            </a>
-            <div class="text mt-3 float-right d-block">
-                <div class="d-flex align-items-center p-2 mb-4 topp">
-                    <div class="one">
-                        <span class="day mr-1">29</span>
-                    </div>
-                    <div class="two">
-                        <span class="yr">2019</span>
-                        <span class="mos">May</span>
-                    </div>
-                </div>
-              <h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3 ">
-            <div class="blog-entry">
-            <a href="blog-single.html" class="block-20" style="background-image: url('assets/images/gamesch4.jpg');">
-            </a>
-            <div class="text mt-3 float-right d-block">
-                <div class="d-flex align-items-center p-2 pr-3 mb-4 topp">
-                    <div class="one">
-                        <span class="day mr-1">29</span>
-                    </div>
-                    <div class="two">
-                        <span class="yr">2019</span>
-                        <span class="mos">May</span>
-                    </div>
-                </div>
-              <h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
-            </div>
-          </div>
+    
+      </div>
+      <div class="row d-flex" *ngIf="emptyblogarray">
+        <div class="col-lg-12 text-center">
+          <p>No data found.</p>
         </div>
       </div>
-      <!-- <div class="row mt-5">
-        <div class="col text-center">
-          <div class="block-27">
-            <ul>
-              <li><a href="#">&lt;</a></li>
-              <li class="active"><span>1</span></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
-              <li><a href="#">&gt;</a></li>
-            </ul>
-          </div>
-        </div>
-      </div> -->
     </div>
   </section>
 

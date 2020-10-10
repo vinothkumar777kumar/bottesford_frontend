@@ -14,6 +14,11 @@ import { ViewBookingListComponent } from 'src/app/pages/view-booking-list/view-b
 import { SportshallBookingListComponent } from 'src/app/pages/sportshall-booking-list/sportshall-booking-list.component';
 import { GamesResultComponent } from 'src/app/pages/games-result/games-result.component';
 import { AddGameResultComponent } from 'src/app/pages/add-game-result/add-game-result.component';
+import { ManagerDashboardComponent } from 'src/app/pages/manager-dashboard/manager-dashboard.component';
+import { ManagerTeamMatchesComponent } from 'src/app/pages/manager-team-matches/manager-team-matches.component';
+import { ManagerTeamPlayersComponent } from 'src/app/pages/manager-team-players/manager-team-players.component';
+import { BlogListComponent } from 'src/app/pages/blog-list/blog-list.component';
+import { AddBlogComponent } from 'src/app/pages/add-blog/add-blog.component';
 
 
 
@@ -23,6 +28,7 @@ export const AdminLayoutRoutes: Routes = [
     {
         path: '',children: [
             { path: 'dashboard',component:AdminDashboardComponent},
+            { path: 'team-manager-dashboard',component:ManagerDashboardComponent},
             { path: 'team-list',component:TeamListComponent },
             { path: 'players-list',component:PlayersListComponent },
             { path: 'add-team', component:AddTeamComponent },
@@ -36,6 +42,10 @@ export const AdminLayoutRoutes: Routes = [
             { path: 'view-booking-list', component:ViewBookingListComponent},
             { path: 'games-result', component:GamesResultComponent},
             { path: 'add-game-result', component:AddGameResultComponent},
+            { path: 'manager-team-players', component:ManagerTeamPlayersComponent},
+            { path: 'manager-team-matches', component:ManagerTeamMatchesComponent},
+            { path: 'blog-list', component:BlogListComponent},
+            { path: 'add-blog', component:AddBlogComponent}
             
         ]
     }

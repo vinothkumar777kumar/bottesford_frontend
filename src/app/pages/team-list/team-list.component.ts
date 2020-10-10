@@ -31,7 +31,8 @@ export class TeamListComponent implements OnInit {
 this.emptyteams = true;
     }else{
       data.forEach(t => {
-        this.teamsarray.push({id:t.id,team_name:t.team_name,status:t.status});
+        this.teamsarray.push({id:t.id,team_name:t.team_name,team_manager_email:t.team_manager_email,
+          team_manager_name:t.team_manager_name,team_manager_mobile:t.team_manager_mobile,status:t.status});
       })
     }
             }

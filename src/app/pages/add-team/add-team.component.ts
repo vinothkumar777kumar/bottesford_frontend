@@ -20,6 +20,7 @@ export class AddTeamComponent implements OnInit {
   teamid:any;
   title = "Add team";
   submit_action = "Add Team"
+  manager_email:any;
   constructor(private Activate: ActivatedRoute,private toastr: ToastrService,private fb: FormBuilder,
     private ngxService: NgxUiLoaderService,private router: Router,private tmsv:TeamService) {
     this.Activate.queryParams.subscribe(res => {
@@ -39,6 +40,12 @@ export class AddTeamComponent implements OnInit {
        
         this.addTeamForm.controls['id'].setValue(data.id);
         this.addTeamForm.controls['team_name'].setValue(data.team_name);
+        this.addTeamForm.controls['team_manager_name'].setValue(data.team_manager_name);
+        this.addTeamForm.controls['team_manager_mobile'].setValue(data.team_manager_mobile);
+        this.manager_email = data.team_manager_email;
+        this.addTeamForm.controls['team_manager_email'].setValue(data.team_manager_email);
+        this.addTeamForm.controls['team_manager_email'].disable();
+        // this.addTeamForm.controls['team_manager_password'].setValue(data.team_manager_password);
         this.addTeamForm.controls['status'].setValue(data.status);
       }
     });
@@ -49,6 +56,10 @@ export class AddTeamComponent implements OnInit {
     this.addTeamForm = this.fb.group({
       id:[''],
       team_name:['',Validators.required],
+      team_manager_name:['',Validators.required],
+      team_manager_mobile:['',Validators.required],
+      team_manager_email:[null,[Validators.required,Validators.email]],
+      // team_manager_password:['',[Validators.required,Validators.pattern(/^(?=.*[A-Z])(?=.*[!@#\$%\^&\*])(?=.{9,})/)]],
       status:[1]
     })
   }
@@ -62,6 +73,8 @@ export class AddTeamComponent implements OnInit {
       if(this.addTeamForm.invalid){
   return;
       }else if(this.addTeamForm.value.id){
+        this.addTeamForm.controls['team_manager_email'].enable();
+        this.addTeamForm.controls['team_manager_email'].setValue(this.manager_email);
         this.ngxService.start();
         this.tmsv.updateteam(this.addTeamForm.value).then(res => {
           this.ngxService.stop();
@@ -135,9 +148,20 @@ export class AddTeamComponent implements OnInit {
         });
       }
         }
+
+        
     
   })
       }
+    }
+
+    numberOnly(event): boolean {
+      const charCode = (event.which) ? event.which : event.keyCode;
+      if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+      }
+      return true;
+  
     }
 
 }

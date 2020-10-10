@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   isnextmatch:boolean = false;
   isgameschedule:boolean = false;
   isnextmatchshow:boolean = false;
+  islatestgameresult:boolean = false;
   teamsarray = [];
   match_image_api:any;
   nextmatchdata = {
@@ -140,6 +141,7 @@ this.emptyteams = true;
       if(res['status'] == 'success'){
     let data = res['data'][0];
     if(data == ''){
+      this.islatestgameresult = true;
 this.emptyteams = true;
     }else{
       this.lastmatchresult.match_name = data.match_name;
@@ -226,6 +228,11 @@ loadnextmatch(){
     // console.log(m.match_name);
     this.nextmatchesdata.push({match_name:m.match_name})
   })
+}
+
+moredetaillastgameresult(){
+  this.matsr.storedatas(this.lastmatchresult);
+  this.router.navigate(['/moreinfo-latestgame-result']);
 }
 
 }

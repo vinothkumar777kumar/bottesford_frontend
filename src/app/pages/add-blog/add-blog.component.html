@@ -1,0 +1,126 @@
+<div>
+    <div class="page-header">
+      <div class="page-block">
+        <div class="row align-items-center">
+          <div class="col-md-12">
+            <div class="page-header-title">
+              <h5 class="m-b-10">Blog</h5>
+            </div>
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a [routerLink]="['/dashboard/']"><i class="feather icon-home"></i></a>
+                <!-- <a [routerLink]="['/dashboard/default/']" *ngIf="type === 'theme1'">Home</a> -->
+              </li>
+              <!-- <ng-container *ngFor="let breadcrumb of navigationList"> -->
+              <li class="breadcrumb-item"><a [routerLink]="['/blog-list']">Blog</a></li>
+              <li class="breadcrumb-item"><a href="javascript:void(0)">{{title}}</a></li>
+              <!-- </ng-container> -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card" [ngClass]="cardClass" [@cardRemove]="cardRemove" #toAnimate>
+        <!-- animates animatesInitMode="show" [animatesOnInit]="{useVisibility: false, disabled: true}" -->
+        <div class="card-header" [ngClass]="headerClass">
+          <h5>{{title}}</h5>
+          <div class="card-header-right">
+            <div class="btn-group card-option">
+              <button type="button" class="btn btn-sm btn-info" [routerLink]="['/blog-list']">
+                <i class="fa fa-times"></i>
+              </button>
+            </div>
+          </div>
+  
+        </div>
+        <div>
+          <div class="card-block">
+            <form [formGroup]="addBlogForm">
+              <input type="hidden" name="id" formControlName="id">
+              <div class="row">
+                <div class="col-md-6" *ngIf="blogimageinput">
+                  <div class="form-group">
+                    <label for="blog_image">Blog Image</label>
+                    <input type="file" class="form-control" id="blog_image" name="blog_image"
+                      formControlName="blog_image" [ngClass]="{ 'is-invalid': submitted && f.blog_image.errors }"
+                      (change)="fileProgress($event)" />
+                    <div *ngIf="submitted && f.blog_image.errors" class="invalid-feedback">
+                      <div *ngIf="f.blog_image.errors.required">Blog Image is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6" *ngIf="blogimageshow">
+                  <div class="form-group">
+                    <label for="blog_image">Blog Image</label><br>
+                    <img src="{{blogimage_url}}" alt="image"
+                                  style="height: 100px;width: 100px;border-radius: 50%;" onerror="this.onerror=null;this.src='assets/img/smd/logo.png';"/>
+                              <button class="delete-entry btn btn-danger btn-sm" style="cursor: pointer;"
+                                  (click)="deleteblogImage()">
+                                  Delete</button>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" name="title"
+                      formControlName="title" [ngClass]="{ 'is-invalid': submitted && f.title.errors }" />
+                    <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                      <div *ngIf="f.title.errors.required">Title is required</div>
+                    </div>
+                  </div>
+                </div>
+               
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="publish_date">Publish date</label>
+                    <div class="input-group">
+                      <input angular-mydatepicker type="text" class="form-control" id="publish_date" name="publish_date"
+                        formControlName="publish_date" [ngClass]="{ 'is-invalid': submitted && f.publish_date.errors }"
+                        [options]="myDatePickerOptions" (dateChanged)="onDateChanged($event,'publishdate')"
+                        #dp="angular-mydatepicker" disabled style="background-color: #fff;" />
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          <a style="cursor: pointer;" class="fa fa-calendar" (click)="dp.toggleCalendar()"></a></span>
+                      </div>
+                      <div *ngIf="submitted && f.publish_date.errors" class="invalid-feedback">
+                        <div *ngIf="f.publish_date.errors.required">Publish Date is required</div>
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" id="description" name="description" formControlName="description"
+                      [ngClass]="{ 'is-invalid': submitted && f.description.errors }"></textarea>
+                    <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                      <div *ngIf="f.description.errors.required">Description is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="status">Status</label>
+                      <select class="form-control" id="status" name="status" formControlName="status"
+                        [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
+                        <option value="1" selected>yes</option>
+                        <option value="0">No</option>
+                      </select>
+                      <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                        <div *ngIf="f.status.errors.required">Status is required</div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              <button type="submit" class="btn btn-primary float-right" (click)="addblog()">{{submit_action}}</button>
+              <div class="clearfix"></div>
+            </form>
+            <!-- {{addBlogForm.value | json}} -->
+          </div>
+        </div>
+      </div>
+    </div>

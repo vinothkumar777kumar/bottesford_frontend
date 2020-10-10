@@ -9,11 +9,16 @@ import {DattaConfig} from './../../../../../app-config';
   styleUrls: ['./nav-group.component.css']
 })
 export class NavGroupComponent implements OnInit {
-  @Input() item: NavigationItem;
+  @Input() item: any;
   public dattaConfig: any;
-
+  session_data:any;
   constructor(private zone: NgZone, private location: Location) { 
     this.dattaConfig = DattaConfig.config;
+    this.session_data =  JSON.parse(sessionStorage.getItem('login_details'));
+    console.log(this.session_data['role_type']);
+    if(this.session_data['role_type'] == 2){
+      this.item = NavigationItem;
+    }
   }
 
   

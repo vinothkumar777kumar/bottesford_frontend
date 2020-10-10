@@ -1,6 +1,7 @@
 {
     "apiurl":"http://192.168.43.55/bottesford_backend/api/",
     "player_image_url":"http://192.168.43.55/bottesford_backend/uploads/",
-    "match_image_url":"http://192.168.43.55/bottesford_backend/uploads/match/"
+    "match_image_url":"http://192.168.43.55/bottesford_backend/uploads/match/",
+    "blog_image_url":"http://192.168.43.55/bottesford_backend/uploads/blog/"
     }
     

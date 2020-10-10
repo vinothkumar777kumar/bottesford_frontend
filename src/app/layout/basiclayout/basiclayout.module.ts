@@ -15,6 +15,8 @@ import { HallDetailComponent } from 'src/app/pages/hall-detail/hall-detail.compo
 import { BuyticketsComponent } from 'src/app/pages/buytickets/buytickets.component';
 import { SportsHallBookingComponent } from 'src/app/pages/sports-hall-booking/sports-hall-booking.component';
 import { AngularMyDatePickerModule } from 'angular-mydatepicker';
+import { MoreinfoLatestgameResultComponent } from 'src/app/pages/moreinfo-latestgame-result/moreinfo-latestgame-result.component';
+import { BlogSingleComponent } from 'src/app/pages/blog-single/blog-single.component';
 
 
 
@@ -23,7 +25,7 @@ import { AngularMyDatePickerModule } from 'angular-mydatepicker';
 @NgModule({
   declarations: [LoginComponent,RegisterComponent,ForgotPasswordComponent,
     GamesComponent,BlogComponent,ContactComponent,HallDetailComponent,
-    BuyticketsComponent,SportsHallBookingComponent
+    BuyticketsComponent,SportsHallBookingComponent,MoreinfoLatestgameResultComponent,BlogSingleComponent
   ],
   imports: [
     CommonModule,FormsModule,ReactiveFormsModule,

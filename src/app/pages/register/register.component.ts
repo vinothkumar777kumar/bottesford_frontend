@@ -21,6 +21,7 @@ export class RegisterComponent implements OnInit {
       email:['',[Validators.required,Validators.email]],
       password:['',[Validators.required,Validators.pattern(/^(?=.*[A-Z])(?=.*[!@#\$%\^&\*])(?=.{9,})/)]],
       mobile:['',Validators.required],
+      role_type:['3'],
       status:['1'],
     });
     // this.ngxService.startBackground('do-background-things');
@@ -56,7 +57,7 @@ this.auth.register(data).then(res => {
     this.router.navigateByUrl('/login')
     this.toastr.success(res['message'], 'Info', {
       progressBar:true,
-      timeOut:10000
+      timeOut:1000
     });
   }
 },error => {

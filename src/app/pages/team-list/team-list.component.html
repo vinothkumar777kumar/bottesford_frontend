@@ -21,6 +21,9 @@
                 <tr>
                   <th>No</th>
                   <th>Team Name</th>
+                  <th>Manager</th>
+                  <th>Manager Email</th>
+                  <th>Manager Mobile</th>
                   <th>Status</th>
                   <th>Edit</th>
                   <th>Delete</th>
@@ -30,6 +33,9 @@
                 <tr *ngFor="let t of teamsarray;let i = index">
                   <th scope="row">{{i + 1}}</th>
                   <td>{{t.team_name}}</td>
+                  <td>{{t.team_manager_name}}</td>
+                  <td>{{t.team_manager_email}}</td>
+                  <td>{{t.team_manager_mobile}}</td>
                   <td>
                     <span *ngIf="t.status == 1" class="label label-primary">Active</span>
                     <span *ngIf="t.status == 0" class="label label-warning">Non-Active</span>
@@ -42,7 +48,7 @@
                   </td>
                 </tr>
                 <tr *ngIf="emptyteams" style="text-align: center;">
-                  <td colspan="5">No Data Found</td>
+                  <td colspan="8">No Data Found</td>
                 </tr>
   
               </tbody>

@@ -2,6 +2,7 @@ import {AfterViewInit, Component, ElementRef, EventEmitter, NgZone, OnInit, Outp
 import {NavigationItem} from '../navigation';
 import {DattaConfig} from './../../../../app-config';
 import {Location} from '@angular/common';
+import { ManagerNavigationItem } from '../manager-navigation';
 @Component({
   selector: 'app-nav-content',
   templateUrl: './nav-content.component.html',
@@ -18,14 +19,22 @@ export class NavContentComponent implements OnInit,AfterViewInit {
   public wrapperWidth: any;
   public scrollWidth: any;
   public windowWidth: number;
-
+  session_data:any;
   @ViewChild('navbarContent', {static: false}) navbarContent: ElementRef;
   @ViewChild('navbarWrapper', {static: false}) navbarWrapper: ElementRef;
-  constructor(public nav: NavigationItem, private zone: NgZone, private location: Location) {
+  constructor(public nav: NavigationItem, public mnav: ManagerNavigationItem, private zone: NgZone, private location: Location) {
+    this.session_data =  JSON.parse(sessionStorage.getItem('login_details'));
+    console.log(this.session_data['role_type']);
+    if(this.session_data['role_type'] == 1){
+      this.navigation = this.nav.get();
+      // this.item = NavigationItem;
+    }else if(this.session_data['role_type'] == 2){
+      this.navigation = this.mnav.get();
+    }
     this.dattaConfig = DattaConfig.config;
     this.windowWidth = window.innerWidth;
 
-    this.navigation = this.nav.get();
+  
     this.prevDisabled = 'disabled';
     this.nextDisabled = '';
     this.scrollWidth = 0;

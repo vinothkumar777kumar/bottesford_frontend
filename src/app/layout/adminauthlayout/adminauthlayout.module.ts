@@ -8,11 +8,12 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { AdminLoginComponent } from 'src/app/pages/admin-login/admin-login.component';
 import { AdminAuthlayoutRoutingModule } from './adminauthlayout-routing.module';
+import { ManagerSignUpComponent } from 'src/app/pages/manager-sign-up/manager-sign-up.component';
 
 
 
 @NgModule({
-  declarations: [AdminLoginComponent],
+  declarations: [AdminLoginComponent,ManagerSignUpComponent],
   imports: [
     CommonModule,AdminAuthlayoutRoutingModule,FormsModule,ReactiveFormsModule,
     NgbModule

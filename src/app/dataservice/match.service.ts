@@ -5,7 +5,7 @@ import { DataserviceService } from './dataservice.service';
   providedIn: 'root'
 })
 export class MatchService {
-
+storedata:any;
   constructor(private ds: DataserviceService) { }
   getmatchimageAPI(): string {
     console.log(sessionStorage.getItem('match_image_url'));
@@ -33,5 +33,13 @@ export class MatchService {
 
   postmethode(service:any,data: any,isFileUpload=false){
     return this.ds.apipostRecords(service,data,isFileUpload).then(res => res);
+  }
+
+  storedatas(data:any){
+    this.storedata = data;
+  }
+
+  getstoredata(){
+    return this.storedata;
   }
 }

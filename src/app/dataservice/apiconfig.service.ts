@@ -16,6 +16,7 @@ export class ApiconfigService {
         sessionStorage.setItem('api_url', res.apiurl);       
         sessionStorage.setItem('player_image_url', res.player_image_url);
         sessionStorage.setItem('match_image_url', res.match_image_url);
+        sessionStorage.setItem('blog_image_url', res.blog_image_url);
       }
     );
   }

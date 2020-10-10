@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
 this.auth.login(this.loginForm.value).then(res => {
   this.ngxService.stop();
   if(res['status'] == 'success'){
-    if(res['role_type'] == 2){
+    if(res['role_type'] == 3){
     this.auth.seesionuser_info(res);
     this.toastr.success(res['message'], 'Info', {
       progressBar:true
@@ -50,7 +50,7 @@ this.auth.login(this.loginForm.value).then(res => {
 });
   }
 }
-  console.log(res);
+  // console.log(res);
 },error => {
   this.ngxService.stop();
   console.log(error);

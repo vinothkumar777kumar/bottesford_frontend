@@ -78,6 +78,14 @@ const NavigationItems = [
         classes: 'nav-item',
       },
       {
+        id: 'blog',
+        title: 'Blog',
+        type: 'item',
+        url: '/blog-list',
+        icon: 'feather icon-home',
+        classes: 'nav-item',
+      },
+      {
         id: 'latest_game_result',
         title: 'Games Result',
         type: 'item',

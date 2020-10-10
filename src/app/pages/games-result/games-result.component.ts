@@ -32,13 +32,13 @@ export class GamesResultComponent implements OnInit {
 this.emptygamesresultdata = true;
     }else{
       data.forEach(m => {
-        let cd = moment().format('YYYY-MM-DD');
-        let sd = moment(m.match_date,'DD-MM-YYYY').format('YYYY-MM-DD');
-        if(moment(sd).isBefore(cd) == true){
+        // let cd = moment().format('YYYY-MM-DD');
+        // let sd = moment(m.match_date,'DD-MM-YYYY').format('YYYY-MM-DD');
+        // if(moment(sd).isBefore(cd) == true){
         this.gamesresultdata.push({id:m.id,team_one:m.team_one,team_two:m.team_two,
           match_name:m.match_name,round:m.round,match_date:m.match_date,team_one_goal:m.team_one_goal,
           team_two_goal:m.team_two_goal});
-        }
+        // }
       })
     }
             }

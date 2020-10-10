@@ -19,11 +19,20 @@ import { SportshallBookingListComponent } from './sportshall-booking-list/sports
 import { ViewBookingListComponent } from './view-booking-list/view-booking-list.component';
 import { GamesResultComponent } from './games-result/games-result.component';
 import { AddGameResultComponent } from './add-game-result/add-game-result.component';
+import { MoreinfoLatestgameResultComponent } from './moreinfo-latestgame-result/moreinfo-latestgame-result.component';
+import { ManagerSignUpComponent } from './manager-sign-up/manager-sign-up.component';
+import { ManagerDashboardComponent } from './manager-dashboard/manager-dashboard.component';
+import { ManagerTeamPlayersComponent } from './manager-team-players/manager-team-players.component';
+import { ManagerTeamMatchesComponent } from './manager-team-matches/manager-team-matches.component';
+import { BlogListComponent } from './blog-list/blog-list.component';
+import { AddBlogComponent } from './add-blog/add-blog.component';
+import { ViewSingleBlogComponent } from './view-single-blog/view-single-blog.component';
+import { BlogSingleComponent } from './blog-single/blog-single.component';
 
 
 
 @NgModule({
-  declarations: [AdminLoginComponent, AdminDashboardComponent, HallDetailComponent, AddTeamComponent, AddPlayersComponent, TeamListComponent, PlayersListComponent, ViewPlayersComponent, TeamPlayersComponent, PlayerDetailsComponent, MatchListComponent, AddMatchComponent, SportsHallBookingComponent, UsersListComponent, TicketBookingListComponent, SportshallBookingListComponent, ViewBookingListComponent, GamesResultComponent, AddGameResultComponent],
+  declarations: [AdminLoginComponent, AdminDashboardComponent, HallDetailComponent, AddTeamComponent, AddPlayersComponent, TeamListComponent, PlayersListComponent, ViewPlayersComponent, TeamPlayersComponent, PlayerDetailsComponent, MatchListComponent, AddMatchComponent, SportsHallBookingComponent, UsersListComponent, TicketBookingListComponent, SportshallBookingListComponent, ViewBookingListComponent, GamesResultComponent, AddGameResultComponent, MoreinfoLatestgameResultComponent, ManagerSignUpComponent, ManagerDashboardComponent, ManagerTeamPlayersComponent, ManagerTeamMatchesComponent, BlogListComponent, AddBlogComponent, ViewSingleBlogComponent, BlogSingleComponent],
   imports: [
     CommonModule
   ]

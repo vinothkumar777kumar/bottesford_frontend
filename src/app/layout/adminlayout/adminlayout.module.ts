@@ -18,6 +18,11 @@ import { SportshallBookingListComponent } from 'src/app/pages/sportshall-booking
 import { ViewBookingListComponent } from 'src/app/pages/view-booking-list/view-booking-list.component';
 import { GamesResultComponent } from 'src/app/pages/games-result/games-result.component';
 import { AddGameResultComponent } from 'src/app/pages/add-game-result/add-game-result.component';
+import { ManagerDashboardComponent } from 'src/app/pages/manager-dashboard/manager-dashboard.component';
+import { ManagerTeamMatchesComponent } from 'src/app/pages/manager-team-matches/manager-team-matches.component';
+import { ManagerTeamPlayersComponent } from 'src/app/pages/manager-team-players/manager-team-players.component';
+import { BlogListComponent } from 'src/app/pages/blog-list/blog-list.component';
+import { AddBlogComponent } from 'src/app/pages/add-blog/add-blog.component';
 
 
 
@@ -27,7 +32,8 @@ import { AddGameResultComponent } from 'src/app/pages/add-game-result/add-game-r
   declarations: [AdminDashboardComponent,TeamListComponent,PlayersListComponent,AddTeamComponent,
     AddPlayersComponent,ViewPlayersComponent,MatchListComponent,AddMatchComponent,UsersListComponent,
     TicketBookingListComponent,SportshallBookingListComponent,ViewBookingListComponent,GamesResultComponent,
-    AddGameResultComponent
+    AddGameResultComponent,ManagerDashboardComponent,ManagerTeamMatchesComponent,ManagerTeamPlayersComponent,
+    BlogListComponent,AddBlogComponent
   ],
   imports: [
     CommonModule,

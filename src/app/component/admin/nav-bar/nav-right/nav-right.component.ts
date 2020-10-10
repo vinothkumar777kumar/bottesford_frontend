@@ -38,8 +38,15 @@ export class NavRightComponent implements OnInit , DoCheck{
   public chatMessage: boolean;
   public friendId: boolean;
   public dattaConfig: any;
-
-  constructor(config: NgbDropdownConfig,private router: Router,private ds: DataserviceService) { 
+  role:any;
+  logininfo:any;
+  constructor(config: NgbDropdownConfig,private router: Router,private ds: DataserviceService) {
+    this.logininfo = JSON.parse(sessionStorage.getItem('login_details'));
+    if(this.logininfo['role_type'] == 1){
+      this.role = 'Admin';
+    }else if(this.logininfo['role_type'] == 2){
+      this.role = 'Manager';
+    }
     config.placement = 'bottom-right';
     this.visibleUserList = false;
     this.chatMessage = false;

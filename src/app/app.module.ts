@@ -31,6 +31,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AdminauthlayoutModule } from './layout/adminauthlayout/adminauthlayout.module';
 import { AdminlayoutModule } from './layout/adminlayout/adminlayout.module';
+import { ManagerNavigationItem } from './component/admin/navigation/manager-navigation';
 
 // import { SharedModule } from './theme/shared/shared.module';
 
@@ -68,7 +69,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     AdminauthlayoutModule,
     AdminlayoutModule
   ],
-  providers: [Location,{provide:LocationStrategy,useClass:PathLocationStrategy},NavigationItem],
+  providers: [Location,{provide:LocationStrategy,useClass:PathLocationStrategy},NavigationItem,ManagerNavigationItem],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

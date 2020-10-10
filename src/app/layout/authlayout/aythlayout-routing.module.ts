@@ -12,6 +12,8 @@ import { HomeComponent } from 'src/app/pages/home/home.component';
 import { HallDetailComponent } from 'src/app/pages/hall-detail/hall-detail.component';
 import { TeamPlayersComponent } from 'src/app/pages/team-players/team-players.component';
 import { PlayerDetailsComponent } from 'src/app/pages/player-details/player-details.component';
+import { MoreinfoLatestgameResultComponent } from 'src/app/pages/moreinfo-latestgame-result/moreinfo-latestgame-result.component';
+import { BlogSingleComponent } from 'src/app/pages/blog-single/blog-single.component';
 
 
 
@@ -30,7 +32,8 @@ const AuthLayoutRoutes: Routes = [
             { path: 'hall-detail', component: HallDetailComponent },
             { path: 'team-players', component: TeamPlayersComponent},
             { path: 'player-details', component: PlayerDetailsComponent },
-        
+            { path: 'moreinfo-latestgame-result', component: MoreinfoLatestgameResultComponent },
+            { path: 'blog-single', component: BlogSingleComponent },
     
 ];
 @NgModule({

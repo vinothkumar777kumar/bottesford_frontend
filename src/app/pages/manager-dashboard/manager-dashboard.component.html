@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col-lg-3">
+      <a href="javascript:void(0)" [routerLink]="['/users-list']">
+      <app-card [hidHeader]="true">
+        
+          <h6 class="mb-4">Players</h6>
+          <div class="row d-flex align-items-center">
+            <div class="col-9">
+              <h3 class="f-w-300 d-flex align-items-center m-b-0"><i class="fa fa-users text-c-green f-30 m-r-10"></i>{{playerscount}}</h3>
+            </div>
+  
+            <!-- <div class="col-3 text-right">
+              <p class="m-b-0">3</p>
+            </div> -->
+          </div>
+          <div class="progress m-t-30" style="height: 7px;">
+            <div class="progress-bar progress-c-theme" role="progressbar" [style.width.%]="playerscount" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        
+      </app-card>
+    </a>
+    </div>
+    
+    <div class="col-lg-3">
+      <a href="javascript:void(0)" [routerLink]="['/match-list']">
+      <app-card [hidHeader]="true">
+        <h6 class="mb-4">Play Matches</h6>
+        <div class="row d-flex align-items-center">
+          <div class="col-9">
+            <h3 class="f-w-300 d-flex align-items-center  m-b-0"><i class="fas fa-futbol text-c-green f-30 m-r-10"></i>{{playedmatch}}</h3>
+          </div>
+          <div class="col-3 text-right">
+            <p class="m-b-0"></p>
+          </div>
+        </div>
+        <div class="progress m-t-30" style="height: 7px;">
+          <div class="progress-bar progress-c-theme2" role="progressbar" [style.width.%]="playedmatch" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      </app-card>
+      </a>
+    </div>
+    <div class="col-lg-3">
+        <a href="javascript:void(0)" [routerLink]="['/match-list']">
+        <app-card [hidHeader]="true">
+          <h6 class="mb-4">Win Matches</h6>
+          <div class="row d-flex align-items-center">
+            <div class="col-9">
+              <h3 class="f-w-300 d-flex align-items-center  m-b-0"><i class="fas fa-futbol text-c-green f-30 m-r-10"></i>{{winmatch}}</h3>
+            </div>
+            <div class="col-3 text-right">
+              <p class="m-b-0"></p>
+            </div>
+          </div>
+          <div class="progress m-t-30" style="height: 7px;">
+            <div class="progress-bar progress-c-theme2" role="progressbar" [style.width.%]="winmatch" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </app-card>
+        </a>
+      </div>
+    
+
+  
+  </div>
+  

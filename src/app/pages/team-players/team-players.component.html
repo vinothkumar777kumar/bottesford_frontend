@@ -25,8 +25,8 @@
               </div>
         <div class="col-md-6 col-lg-3" *ngFor="let p of teamplayers;let i = index">
           <a href="javascript:void(0)" (click)="goto_playerdetails(p)">
-            <div class="blog-entry justify-content-end">
-            <a href="javascript:void(0)" class="block-20" [style.background]="'url(' + p.player_image + ')'" [style.backgroundSize]="'cover'">
+            <div class="blog-entry justify-content-end parent">
+            <a href="javascript:void(0)" class="block-20 child" [style.background]="'url(' + p.player_image + ')'" [style.backgroundSize]="'cover'">
             </a>
             <div class="text mt-3 float-right d-block">
                 <div class="d-flex align-items-center p-2 pr-3 mb-4 topp">

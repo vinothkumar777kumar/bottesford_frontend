@@ -51,6 +51,46 @@
                </div>
             </div>
             <div class="col-md-6">
+              <div class="form-group">
+               <label for="team_manager_name">Manager Name</label>
+               <input type="text" class="form-control" id="team_manager_name" name="team_manager_name" formControlName="team_manager_name" [ngClass]="{ 'is-invalid': submitted && f.team_manager_name.errors }"/>
+               <div *ngIf="submitted && f.team_manager_name.errors" class="invalid-feedback">
+                   <div *ngIf="f.team_manager_name.errors.required">Manager Name is required</div>
+               </div>
+              </div>
+           </div>
+           <div class="col-md-6">
+           <div class="form-group">
+            <label>Manager Mobile No.</label>
+            <input class="form-control" type="text" name="team_manager_mobile"  placeholder="Mobile" formControlName="team_manager_mobile" (keypress)="numberOnly($event)" maxlength="11" [ngClass]="{ 'is-invalid': submitted && f.team_manager_mobile.errors }">
+            <div *ngIf="submitted && f.team_manager_mobile.errors" class="invalid-feedback">
+                <div *ngIf="f.team_manager_mobile.errors.required">Manager Mobile No. is required</div>
+            </div>
+   
+        </div>
+        </div>
+        <div class="col-md-6">
+        <div class="form-group">
+          <label>Manager Email</label>
+          <input class="form-control" type="text" name="team_manager_email" placeholder="Email" formControlName="team_manager_email" [ngClass]="{ 'is-invalid': submitted && f.team_manager_email.errors }">
+          <div *ngIf="submitted && f.team_manager_email.errors" class="invalid-feedback">
+              <div *ngIf="f.team_manager_email.errors.required">Email is required</div>
+              <div *ngIf="f.team_manager_email.errors.email">Email must be a valid email address</div>
+          </div>
+ 
+      </div>
+      </div>
+      <!-- <div class="col-md-6">
+      <div class="form-group">
+        <label>Password</label>
+        <input class="form-control" type="password" name="team_manager_password" placeholder="Password" formControlName="team_manager_password" [ngClass]="{ 'is-invalid': submitted && f.team_manager_password.errors }" autocomplete="off">
+        <div *ngIf="submitted && f.team_manager_password.errors" class="invalid-feedback">
+            <div *ngIf="f.team_manager_password.errors.required">Password is required</div>
+            <div *ngIf="f.team_manager_password.errors.pattern">password must be 8 characters, 1 upper case letter, and 1 special character</div>
+        </div>
+    </div>
+    </div> -->
+            <div class="col-md-6">
                <div class="form-group">
                 <label for="status">Status</label>
                 <select class="form-control" id="status" name="status" formControlName="status" [ngClass]="{ 'is-invalid': submitted && f.status.errors }">

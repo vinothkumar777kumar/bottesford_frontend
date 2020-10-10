@@ -14,6 +14,8 @@ import { HomeComponent } from 'src/app/pages/home/home.component';
 import { CartComponent } from 'src/app/pages/cart/cart.component';
 import { BuyticketsComponent } from 'src/app/pages/buytickets/buytickets.component';
 import { SportsHallBookingComponent } from 'src/app/pages/sports-hall-booking/sports-hall-booking.component';
+import { MoreinfoLatestgameResultComponent } from 'src/app/pages/moreinfo-latestgame-result/moreinfo-latestgame-result.component';
+import { BlogSingleComponent } from 'src/app/pages/blog-single/blog-single.component';
 
 
 const BasicLayoutRoutes: Routes = [
@@ -31,6 +33,8 @@ const BasicLayoutRoutes: Routes = [
     { path: 'team-players', component: TeamPlayersComponent },
     { path: 'player-details', component: PlayerDetailsComponent },
     { path: 'sports-hall-booking', component: SportsHallBookingComponent },
+    { path: 'moreinfo-latestgame-result', component: MoreinfoLatestgameResultComponent },
+    { path: 'blog-single', component: BlogSingleComponent },
 ];
 
 @NgModule({

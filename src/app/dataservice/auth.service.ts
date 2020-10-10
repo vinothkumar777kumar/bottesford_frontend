@@ -29,4 +29,10 @@ export class AuthService {
   seesionuser_info(res){
     sessionStorage.setItem('login_details',JSON.stringify(res));
 }
+
+manager_signup(data: any) {
+   
+  return this.apiser.postmethod('managersignup',data).then(res => res);
+  
+}
 }

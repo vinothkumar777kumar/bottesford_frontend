@@ -32,7 +32,8 @@ usersdata = [];
 teamsarray = [];
 matchdata = [];
 todayticketbookingdata = [];
-  constructor(private toastr: ToastrService,private router: Router,private matsr:MatchService,private tmsv:TeamService) {
+  constructor(private toastr: ToastrService,private router: Router,private matsr:MatchService,
+    private tmsv:TeamService) {
     setTimeout(() => {
       this.getusers_data();
       },1000);

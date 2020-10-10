@@ -42,16 +42,27 @@ this.auth.login(this.adminloginform.value).then(res => {
     if(res['role_type'] == 1){
     this.toastr.success(res['message'], 'Info', {
       progressBar:true,
-      timeOut:10000
+      timeOut:1000
     });
 setTimeout(() => {
     this.router.navigateByUrl('dashboard', { skipLocationChange: false }).then(() => {
       this.router.navigate(['dashboard']);
   });
 },1000);
-}else{
-  this.router.navigateByUrl('login', { skipLocationChange: false }).then(() => {
-    this.router.navigate(['login']);
+}else if(res['role_type'] == 2){
+  this.toastr.success(res['message'], 'Info', {
+    progressBar:true,
+    timeOut:1000
+  });
+  setTimeout(() => {
+    this.router.navigateByUrl('team-manager-dashboard', { skipLocationChange: false }).then(() => {
+      this.router.navigate(['team-manager-dashboard']);
+  });
+},3000);
+}
+else{
+  this.router.navigateByUrl('admin', { skipLocationChange: false }).then(() => {
+    this.router.navigate(['admin']);
 });
   }
 }
