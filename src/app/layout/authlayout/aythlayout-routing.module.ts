@@ -24,7 +24,7 @@ const AuthLayoutRoutes: Routes = [
               },
             { path: 'myaccount', component: MyaccountComponent },
             { path: 'about', component: AboutComponent },
-            { path: 'games', component: GamesComponent },
+            { path: 'match', component: GamesComponent },
             { path: 'blog', component: BlogComponent },
             { path: 'contact', component: ContactComponent },
             { path: 'buyticket', component: BuyticketsComponent },

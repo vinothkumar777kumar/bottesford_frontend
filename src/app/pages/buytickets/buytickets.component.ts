@@ -20,7 +20,7 @@ export class BuyticketsComponent implements OnInit {
   matchdata = [];
 emptymatchdata:boolean = false;
 match_image_api:any;
-  constructor(private router: Router,private matsr: MatchService,private toastr: ToastrService,) {
+  constructor(private router: Router,private matsr: MatchService,private toastr: ToastrService) {
     this.getmatch_data();
     this.match_image_api = this.matsr.getmatchimageAPI();
   

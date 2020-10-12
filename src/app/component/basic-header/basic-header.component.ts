@@ -18,10 +18,10 @@ export const ROUTES = [
   { path: '', title: 'Teams',  icon:'fa fa-ticket', class: 'nav-item dropdown',badgecls:'',subMenu:[
     { path: '/home', title: 'Home',  icon: 'fa fa-user', class: 'nav-item',badgecls:'',subMenu:[] },
   ],style:""},
-  { path: '/games', title: 'Games',  icon:'fa fa-image', class: 'nav-item',badgecls:'',subMenu: [],style:""},
+  { path: '/match', title: 'Match',  icon:'fa fa-image', class: 'nav-item',badgecls:'',subMenu: [],style:""},
   // { path: '/wallet', title: 'Wallet',  icon:'fa fa-ticket', class: '' },
   { path: '/blog', title: 'Blog',  icon:'fa fa-ticket', class: 'nav-item',badgecls:'',subMenu:[],style:""},
-  { path: '/contact', title: 'Contact',  icon:'fa fa-key', class: 'nav-item',badgecls:'',subMenu:[],style:""},
+  // { path: '/contact', title: 'Contact',  icon:'fa fa-key', class: 'nav-item',badgecls:'',subMenu:[],style:""},
   { path: '/hall-detail', title: 'Book Sports Hall',  icon:'fa fa-lock', class: 'nav-item cta',badgecls:'',subMenu:[],style:"margin-right: 10px"},
   { path: '/login', title: 'Login',  icon:'fa fa-lock', class: 'nav-item cta',badgecls:'nav-item cta',subMenu:[],style:"margin-right: 10px" },
   { path: '/register', title: 'Register',  icon:'fa fa-lock', class: 'nav-item cta',badgecls:'',subMenu:[],style:""}
@@ -33,10 +33,10 @@ export const AuthROUTES = [
   { path: '', title: 'Teams',  icon:'fa fa-ticket', class: 'nav-item dropdown',badgecls:'',subMenu:[
     { path: '/home', title: 'Home',  icon: 'fa fa-user', class: 'nav-item',badgecls:'',subMenu:[] },
   ],style:""},
-  { path: '/games', title: 'Games',  icon:'fa fa-image', class: 'nav-item',badgecls:'',subMenu: [],style:""},
+  { path: '/match', title: 'Match',  icon:'fa fa-image', class: 'nav-item',badgecls:'',subMenu: [],style:""},
   // { path: '/wallet', title: 'Wallet',  icon:'fa fa-ticket', class: '' },
   { path: '/blog', title: 'Blog',  icon:'fa fa-ticket', class: 'nav-item',badgecls:'',subMenu:[],style:""},
-  { path: '/contact', title: 'Contact',  icon:'fa fa-key', class: 'nav-item',badgecls:'',subMenu:[],style:""},
+  // { path: '/contact', title: 'Contact',  icon:'fa fa-key', class: 'nav-item',badgecls:'',subMenu:[],style:""},
   { path: '/myaccount', title: 'My account',  icon:'fa fa-lock', class: 'nav-item',badgecls:'',subMenu:[],style:"margin-right: 10px"},
   { path: '/cart', title: '',  icon:'fas fa-shopping-cart', class: 'nav-item',badgecls:'badge',subMenu:[],style:"margin-right: 10px" },
   { path: '/hall-detail', title: 'Book Sports Hall',  icon:'fa fa-lock', class: 'nav-item cta',badgecls:'',subMenu:[],style:"margin-right: 10px"},
@@ -55,6 +55,7 @@ export class BasicHeaderComponent implements OnInit {
   teamsarray = [];
   public menuItems: any[];
   logininfo:any;
+  emptyteamarray:boolean = false;
   constructor(private tmsv:TeamService,private toastr: ToastrService,private router: Router) { 
     this.logininfo = JSON.parse(sessionStorage.getItem('login_details'));
     if(!this.logininfo){
@@ -83,7 +84,7 @@ export class BasicHeaderComponent implements OnInit {
       if(res['status'] == 'success'){
     let data = res['data'];
     if(data == ''){
-// this.emptyteams = true;
+this.emptyteamarray = true;
     }else{
       data.forEach(t => {
         this.teamsarray.push({id:t.id,team_name:t.team_name,status:t.status});

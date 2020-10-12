@@ -15,6 +15,7 @@ declare global {
 export class MoreinfoLatestgameResultComponent implements OnInit {
   emptyleaguetable:boolean = false;
   leaguetabledata = [];
+  filterleagetable:any;
   lastmatchresult = {
     match_name:'',
     team_one:'',
@@ -56,10 +57,42 @@ this.lastmatchresult.video_url = data.video_url;
         if(data == ''){
           this.emptyleaguetable = true;
         }else{
+          console.log(data);
+          let legtbl = [];
         data.forEach(lt => {
-          let w = Number(lt.mp) - Number(lt.loss);
-          this.leaguetabledata.push({team:lt.team,mp:lt.mp,win:lt.win,draw:lt.draw,loss:lt.loss,win_match:w});
+          this.leaguetabledata.push({team:lt.team,mp:lt.mp,win:lt.win,draw:lt.draw,loss:lt.loss,win_match:lt.win});
         })
+
+        let unique = {};
+        let distinct = [];
+        this.leaguetabledata.forEach((x) => {
+          
+          var mp = 0;
+          var win = 0;
+          var draw = 0;
+          var loss = 0;
+       if (!unique[x.team]) {
+        let team =   this.leaguetabledata.filter(res => res.team == x.team);
+        team.forEach(tm => {
+          let match_play = tm.mp;
+          mp += +match_play;
+
+          let match_win = tm.win;
+          win += +match_win;
+
+          let match_draw = tm.draw;
+          draw += +match_draw;
+
+          let match_loss = tm.loss;
+          loss += +match_loss;
+        })
+        // console.log(team);
+              
+         distinct.push({ team: x.team, mp: mp,win_match:win,draw:draw,loss:loss });
+         unique[x.team] = true;
+       }
+      });
+        this.filterleagetable = distinct;
       }
       }
 

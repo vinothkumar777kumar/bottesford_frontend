@@ -21,7 +21,7 @@ import { BlogSingleComponent } from 'src/app/pages/blog-single/blog-single.compo
 const BasicLayoutRoutes: Routes = [
     { path: 'home',component:HomeComponent},
     { path: 'about', component: AboutComponent },
-    { path: 'games', component: GamesComponent },
+    { path: 'match', component: GamesComponent },
     { path: 'blog', component: BlogComponent },
     { path: 'contact', component: ContactComponent },
     { path: 'cart', component: CartComponent },

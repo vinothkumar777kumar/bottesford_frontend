@@ -20,11 +20,9 @@
             <li *ngFor="let t of teamsarray;let i = index" >
               <a class="dropdown-item" href="javascript:void(0)" (click)="gototeamplayers(t)">{{t.team_name}} </a>
             </li>
-            <!-- <li><a class="dropdown-item" href="javascript:void(0)" [routerLink]="['/womens-team']">Womens Team </a></li> -->
+            <li *ngIf="emptyteamarray"><a class="dropdown-item" href="javascript:void(0)">Currently No Team </a></li>
           </ul>
-       
         </li>
-      
       </ul>
     </div>
 

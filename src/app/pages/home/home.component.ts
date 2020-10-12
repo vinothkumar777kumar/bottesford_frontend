@@ -142,8 +142,9 @@ this.emptyteams = true;
     let data = res['data'][0];
     if(data == ''){
       this.islatestgameresult = true;
-this.emptyteams = true;
+// this.emptyteams = true;
     }else{
+      this.islatestgameresult = true;
       this.lastmatchresult.match_name = data.match_name;
       this.lastmatchresult.match_date =  moment(data.match_date,'DD-MM-YYYY').format('ll');
       this.lastmatchresult.team_one = data.team_one;
