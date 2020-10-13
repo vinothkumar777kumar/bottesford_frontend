@@ -40,7 +40,7 @@ export const AuthROUTES = [
   { path: '/myaccount', title: 'My account',  icon:'fa fa-lock', class: 'nav-item',badgecls:'',subMenu:[],style:"margin-right: 10px"},
   { path: '/cart', title: '',  icon:'fas fa-shopping-cart', class: 'nav-item',badgecls:'badge',subMenu:[],style:"margin-right: 10px" },
   { path: '/hall-detail', title: 'Book Sports Hall',  icon:'fa fa-lock', class: 'nav-item cta',badgecls:'',subMenu:[],style:"margin-right: 10px"},
-  { path: '/buyticket', title: 'Buy Ticket',  icon:'fa fa-lock', class: 'nav-item cta',badgecls:'',subMenu:[],style:""}
+  // { path: '/buyticket', title: 'Buy Ticket',  icon:'fa fa-lock', class: 'nav-item cta',badgecls:'',subMenu:[],style:""}
 ];
 
 @Component({

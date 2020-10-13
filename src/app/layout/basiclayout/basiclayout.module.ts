@@ -18,6 +18,7 @@ import { AngularMyDatePickerModule } from 'angular-mydatepicker';
 import { MoreinfoLatestgameResultComponent } from 'src/app/pages/moreinfo-latestgame-result/moreinfo-latestgame-result.component';
 import { BlogSingleComponent } from 'src/app/pages/blog-single/blog-single.component';
 import { PlayerDetailsComponent } from 'src/app/pages/player-details/player-details.component';
+import { ResetPasswordComponent } from 'src/app/pages/reset-password/reset-password.component';
 
 
 
@@ -26,7 +27,8 @@ import { PlayerDetailsComponent } from 'src/app/pages/player-details/player-deta
 @NgModule({
   declarations: [LoginComponent,RegisterComponent,ForgotPasswordComponent,
     GamesComponent,BlogComponent,ContactComponent,HallDetailComponent,
-    BuyticketsComponent,SportsHallBookingComponent,MoreinfoLatestgameResultComponent,BlogSingleComponent,PlayerDetailsComponent
+    BuyticketsComponent,SportsHallBookingComponent,MoreinfoLatestgameResultComponent,
+    BlogSingleComponent,PlayerDetailsComponent,ResetPasswordComponent
   ],
   imports: [
     CommonModule,FormsModule,ReactiveFormsModule,

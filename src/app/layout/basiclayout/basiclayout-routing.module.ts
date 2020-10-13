@@ -16,6 +16,7 @@ import { BuyticketsComponent } from 'src/app/pages/buytickets/buytickets.compone
 import { SportsHallBookingComponent } from 'src/app/pages/sports-hall-booking/sports-hall-booking.component';
 import { MoreinfoLatestgameResultComponent } from 'src/app/pages/moreinfo-latestgame-result/moreinfo-latestgame-result.component';
 import { BlogSingleComponent } from 'src/app/pages/blog-single/blog-single.component';
+import { ResetPasswordComponent } from 'src/app/pages/reset-password/reset-password.component';
 
 
 const BasicLayoutRoutes: Routes = [
@@ -35,6 +36,7 @@ const BasicLayoutRoutes: Routes = [
     { path: 'sports-hall-booking', component: SportsHallBookingComponent },
     { path: 'moreinfo-latestgame-result', component: MoreinfoLatestgameResultComponent },
     { path: 'blog-single', component: BlogSingleComponent },
+    { path: 'reset-password', component: ResetPasswordComponent }
 ];
 
 @NgModule({

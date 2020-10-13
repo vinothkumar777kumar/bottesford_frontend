@@ -13,7 +13,7 @@
       <ul class="navbar-nav ml-auto">
         <li class="{{menu.class}}" *ngFor="let menu of menuItems">
           <a *ngIf="menu.subMenu.length == 0" [routerLink]="[menu.path]"
-        class="nav-link" style="{{menu.style}}">{{menu.title}} <i *ngIf="menu.title == ''" class="fas fa-shopping-cart"></i><span *ngIf="menu.title == ''" class="badge">{{cartdata.length}}</span></a>
+        class="nav-link" style="margin-right: 10px;">{{menu.title}} <i *ngIf="menu.title == ''" class="fas fa-shopping-cart"></i><span *ngIf="menu.title == ''" class="badge">{{cartdata.length}}</span></a>
           <a *ngIf="menu.subMenu.length > 0" class="nav-link dropdown-toggle"
             data-toggle="dropdown" [ngStyle]="menu.style">{{menu.title}}</a>
           <ul *ngIf="menu.subMenu.length > 0" class="dropdown-menu fade-up">
