@@ -2,6 +2,7 @@ import {Component, Input, NgZone, OnInit} from '@angular/core';
 import {NavigationItem} from '../../navigation';
 import {Location} from '@angular/common';
 import {DattaConfig} from './../../../../../app-config';
+import { ManagerNavigationItem } from '../../manager-navigation';
 
 @Component({
   selector: 'app-nav-group',
@@ -11,13 +12,20 @@ import {DattaConfig} from './../../../../../app-config';
 export class NavGroupComponent implements OnInit {
   @Input() item: any;
   public dattaConfig: any;
+  public navigation: any;
   session_data:any;
-  constructor(private zone: NgZone, private location: Location) { 
+  constructor(private zone: NgZone, private location: Location,public mnav: ManagerNavigationItem,public nav: NavigationItem,) { 
     this.dattaConfig = DattaConfig.config;
     this.session_data =  JSON.parse(sessionStorage.getItem('login_details'));
+    console.log(this.nav.get());
     console.log(this.session_data['role_type']);
-    if(this.session_data['role_type'] == 2){
-      this.item = NavigationItem;
+    if(this.session_data['role_type'] == 1){
+      // this.navigation = NavigationItem;
+      this.item = this.nav.get();
+    }else if(this.session_data['role_type'] == 2){
+      // this.navigation = ManagerNavigationItem);
+      this.item = this.mnav.get();
+      // console.log(this.navigation);
     }
   }
 

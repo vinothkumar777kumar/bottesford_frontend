@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import {IAngularMyDpOptions, IMyDateModel, IMyCalendarViewChanged, IMyRangeDateSelection, AngularMyDatePickerDirective} from 'angular-mydatepicker';
 import { MatchService } from 'src/app/dataservice/match.service';
+import { error } from 'protractor';
 
 @Component({
   selector: 'app-add-match',
@@ -36,6 +37,8 @@ export class AddMatchComponent implements OnInit {
   match_image_api:any;
   teamoneimage_url:any;
   teamtwoimage_url:any;
+  endtime:any;
+  starttime:any;
 public myDatePickerOptions: IAngularMyDpOptions = {
   dateRange: false,
   dateFormat: 'dd-mm-yyyy',
@@ -52,8 +55,12 @@ public myDatePickerOptions: IAngularMyDpOptions = {
         team_two_image:['',Validators.required],
         match_name:['',Validators.required],
         round:['',Validators.required],
-        match_date:['',Validators.required]  
-      })
+        match_date:['',Validators.required],
+        start_time:['',Validators.required],
+        end_time:['',Validators.required],
+        ticket_price:['',Validators.required]
+      });
+        
       this.getteams_data();
       this.match_image_api = this.matsr.getmatchimageAPI();
     this.Activate.queryParams.subscribe(res => {
@@ -84,7 +91,7 @@ public myDatePickerOptions: IAngularMyDpOptions = {
         this.addMatchForm.get('team_one_image').clearValidators();
           this.addMatchForm.get('team_one_image').updateValueAndValidity();
 
-          this.addMatchForm.controls['team_two'].setValue(data.team_one);
+          this.addMatchForm.controls['team_two'].setValue(data.team_two);
           this.addMatchForm.get('team_two_image').clearValidators();
             this.addMatchForm.get('team_two_image').updateValueAndValidity();
         this.teamoneimage_name = data.team_one_image;
@@ -116,6 +123,36 @@ public myDatePickerOptions: IAngularMyDpOptions = {
      
         this.addMatchForm.controls['match_name'].setValue(data.match_name);
         this.addMatchForm.controls['round'].setValue(data.round);
+        this.starttime = data.start_time;
+        this.endtime = data.end_time;
+        let start_time = this.getTwentyFourHourTime(data.start_time);
+        let end_time = this.getTwentyFourHourTime(data.end_time);
+      let split_st= start_time.split(':');
+      let split_et = end_time.split(':');
+      let s_t = split_st[0].toString()
+      let s_m = split_st[1].toString();
+
+      let e_t = split_et[0].toString()
+      let e_m = split_et[1].toString();
+
+      if(s_t < '10'){s_t = '0'+split_st[0];}else{s_t = ''+split_st[0];}
+      if(s_m < '10'){ s_m = '0'+split_st[1];}else{s_m = ''+split_st[1];}
+
+      if(e_t < '10'){e_t = '0'+split_et[0];}else{e_t = ''+split_et[0];}
+      if(e_m < '10'){ e_m = '0'+split_et[1];}else{e_m = ''+split_et[1];}
+
+        console.log(s_t,s_m);
+        this.addMatchForm.controls['start_time'].setValue(s_t+':'+s_m);
+        this.addMatchForm.controls['end_time'].setValue(e_t+':'+e_m);
+        this.addMatchForm.controls['ticket_price'].setValue(data.ticket_price);
+      }
+    },error => {
+      if(error['status'] == 401){
+        let er = error['error'];
+        this.toastr.error(er.message, er.error, {
+          progressBar:true
+        });
+        return;
       }
     });
     });
@@ -123,6 +160,11 @@ public myDatePickerOptions: IAngularMyDpOptions = {
 
   ngOnInit(): void {
   }
+
+  getTwentyFourHourTime(amPmString) { 
+    var d = new Date("1/1/2013 " + amPmString); 
+    return d.getHours() + ':' + d.getMinutes(); 
+}
 
    // convenience getter for easy access to form fields
    get f() { return this.addMatchForm.controls; }
@@ -163,6 +205,12 @@ public myDatePickerOptions: IAngularMyDpOptions = {
       if(this.addMatchForm.value.id){
         console.log(this.addMatchForm.value);
         console.log(this.file);
+        if(this.addMatchForm.value.ticket_price <= 0 ){
+          this.toastr.error("Ticket Price Should be greater than 0.", 'Error', {
+            progressBar:true
+          });
+          return;
+        }
       
         let matchdate = this.addMatchForm.value.match_date;
         let md = matchdate.singleDate.date;
@@ -188,6 +236,11 @@ public myDatePickerOptions: IAngularMyDpOptions = {
       myFormData.append('match_name',  this.addMatchForm.value.match_name);
       myFormData.append('round',  this.addMatchForm.value.round);
       myFormData.append('match_date',  this.addMatchForm.value.match_date);
+      myFormData.append('start_time',  this.starttime);
+      myFormData.append('end_time',  this.endtime);
+      myFormData.append('ticket_price',  this.addMatchForm.value.ticket_price);
+      console.log(this.starttime,'start time');
+      console.log(this.endtime,'end time');
         this.ngxService.start();
         this.matsr.postmethode('updatematch',myFormData,true).then(res => {
           this.ngxService.stop();
@@ -207,9 +260,22 @@ public myDatePickerOptions: IAngularMyDpOptions = {
           }
     },error => {
       this.ngxService.stop();
-      console.log(error);
+      if(error['status'] == 401){
+        let er = error['error'];
+        this.toastr.error(er.message, er.error, {
+          progressBar:true
+        });
+        return;
+      }
+  
     });
       }else{
+        if(this.addMatchForm.value.ticket_price <= 0 ){
+          this.toastr.error("Ticket Price Should be greater than 0.", 'Error', {
+            progressBar:true
+          });
+          return;
+        }
         let matchd = this.addMatchForm.value.match_date;
       
         let md = matchd.singleDate.date;
@@ -226,6 +292,11 @@ public myDatePickerOptions: IAngularMyDpOptions = {
         myFormData.append('match_name',  this.addMatchForm.value.match_name);
         myFormData.append('round',  this.addMatchForm.value.round);
         myFormData.append('match_date',  this.addMatchForm.value.match_date);
+        myFormData.append('start_time',  this.starttime);
+        myFormData.append('end_time',  this.endtime);
+        myFormData.append('ticket_price',  this.addMatchForm.value.ticket_price);
+        console.log(this.starttime,'start time');
+        console.log(this.endtime,'end time');
         this.ngxService.start();
         this.matsr.postmethode('addmatch',myFormData,true).then(res => {
           this.ngxService.stop();
@@ -245,7 +316,13 @@ public myDatePickerOptions: IAngularMyDpOptions = {
           }
     },error => {
       this.ngxService.stop();
-      console.log(error);
+      if(error['status'] == 401){
+        let er = error['error'];
+        this.toastr.error(er.message, er.error, {
+          progressBar:true
+        });
+        return;
+      }
     });
       }
  
@@ -389,6 +466,69 @@ public myDatePickerOptions: IAngularMyDpOptions = {
       console.log(error);
     })
   }
+}
+
+onTimeChange(event,texttime){
+  if(texttime == 'start_time'){
+    var inputEle = document.getElementById('start_time');
+    var timeSplit = event.target.value.split(':'),
+    hours,
+    minutes,
+    meridian;
+  hours = timeSplit[0];
+  minutes = timeSplit[1];
+  if (hours > 12) {
+    meridian = 'PM';
+    hours -= 12;
+  } else if (hours < 12) {
+    meridian = 'AM';
+    if (hours == 0) {
+      hours = 12;
+    }
+  } else {
+    meridian = 'PM';
+  }
+  this.starttime = hours + ':' + minutes+' '+meridian;
+  // console.log(this.starttime +'start time');
+  // this.starttime = hours + ':' + minutes;
+  }else{
+    var inputEle = document.getElementById('end_time');
+    var timeSplit = event.target.value.split(':'),
+    hours,
+    minutes,
+    meridian;
+  hours = timeSplit[0];
+  minutes = timeSplit[1];
+  if (hours > 12) {
+    meridian = 'PM';
+    hours -= 12;
+  } else if (hours < 12) {
+    meridian = 'AM';
+    if (hours == 0) {
+      hours = 12;
+    }
+  } else {
+    meridian = 'PM';
+  }
+  console.log(hours + ':' + minutes);
+  this.endtime = hours + ':' + minutes+' '+meridian;
+  // console.log(this.endtime +'end time');
+  }
+}
+
+numberOnly(evt): boolean {
+  // const charCode = (event.which) ? event.which : event.keyCode;
+  // if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+  //   return false;
+  // }
+  // return true;
+
+  var charCode = (evt.which) ? evt.which : evt.keyCode;
+  if (charCode != 46 && charCode > 31
+    && (charCode < 48 || charCode > 57))
+    return false;
+
+
 }
 
 }

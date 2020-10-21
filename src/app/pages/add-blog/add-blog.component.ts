@@ -8,6 +8,7 @@ import { BlogService } from 'src/app/dataservice/blog.service';
 import {IAngularMyDpOptions, IMyDateModel, IMyCalendarViewChanged, IMyRangeDateSelection, AngularMyDatePickerDirective} from 'angular-mydatepicker';
 import { TeamService } from 'src/app/dataservice/team.service';
 import { DataserviceService } from 'src/app/dataservice/dataservice.service';
+import { error } from 'protractor';
 
 @Component({
   selector: 'app-add-blog',
@@ -90,6 +91,14 @@ export class AddBlogComponent implements OnInit {
           this.title = 'Add Blog';
           this.submit_action = "Save";
         }
+      },error => {
+        if(error['status'] == 401){
+          let er = error['error'];
+          this.toastr.error(er.message, er.error, {
+            progressBar:true
+          });
+          return;
+        }
       });
      }
 
@@ -163,7 +172,13 @@ export class AddBlogComponent implements OnInit {
           }
     },error => {
       this.ngxService.stop();
-      console.log(error);
+      if(error['status'] == 401){
+        let er = error['error'];
+        this.toastr.error(er.message, er.error, {
+          progressBar:true
+        });
+        return;
+      }
     });
       }else{
         let pubd = this.addBlogForm.value.publish_date;
@@ -204,7 +219,13 @@ export class AddBlogComponent implements OnInit {
           }
     },error => {
       this.ngxService.stop();
-      console.log(error);
+      if(error['status'] == 401){
+        let er = error['error'];
+        this.toastr.error(er.message, er.error, {
+          progressBar:true
+        });
+        return;
+      }
     });
       }
  

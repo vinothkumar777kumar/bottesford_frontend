@@ -19,6 +19,10 @@ import { ManagerTeamMatchesComponent } from 'src/app/pages/manager-team-matches/
 import { ManagerTeamPlayersComponent } from 'src/app/pages/manager-team-players/manager-team-players.component';
 import { BlogListComponent } from 'src/app/pages/blog-list/blog-list.component';
 import { AddBlogComponent } from 'src/app/pages/add-blog/add-blog.component';
+import { MatchScheduleComponent } from 'src/app/pages/match-schedule/match-schedule.component';
+import { MatchScheduleDetailsComponent } from 'src/app/pages/match-schedule-details/match-schedule-details.component';
+import { ManagerAddteamPlayersComponent } from 'src/app/pages/manager-addteam-players/manager-addteam-players.component';
+import { ChangePasswordComponent } from 'src/app/pages/change-password/change-password.component';
 
 
 
@@ -45,7 +49,11 @@ export const AdminLayoutRoutes: Routes = [
             { path: 'manager-team-players', component:ManagerTeamPlayersComponent},
             { path: 'manager-team-matches', component:ManagerTeamMatchesComponent},
             { path: 'blog-list', component:BlogListComponent},
-            { path: 'add-blog', component:AddBlogComponent}
+            { path: 'add-blog', component:AddBlogComponent},
+            { path: 'match-schedule', component:MatchScheduleComponent},
+            { path: 'match-schedule-details', component:MatchScheduleDetailsComponent},
+            { path: 'manager-addteam-players', component:ManagerAddteamPlayersComponent},
+            { path: 'change-password', component:ChangePasswordComponent},
             
         ]
     }

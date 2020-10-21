@@ -3,7 +3,7 @@
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
           <div class="col-md-6 mt-5 pt-5 mt-5">
-            <h1 class="mb-4" style="margin-top: 63px;">BOTTESFORD TOWN FOOTBALL CLUB</h1>
+            <h1 class="mb-4" style="margin-top: 96px;">BOTTESFORD TOWN FOOTBALL CLUB</h1>
             <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
             <p><a href="#" class="btn btn-secondary py-3 px-4" style="margin-right: 5px;">Watch match</a> <a href="#" class="btn btn-primary py-3 px-4">Get ticket</a></p>
           </div>
@@ -49,7 +49,7 @@
 								</div>
 								<div class="col-md-6 pb-4 pb-lg-0 col-lg-2">
 									<div class="text">
-										<p class="mb-0"><a href="javascript:void(0)" (click)="buyticket()" class="btn btn-primary py-3">Buy Tickets</a></p>
+										<p class="mb-0"><a href="javascript:void(0)" [routerLink]="['/match']" class="btn btn-primary py-3">Buy Tickets</a></p>
 									</div>
 								</div>
 							</div>
@@ -126,6 +126,7 @@
 					<div class="col-md-12 carousel-game-schedule">
                         <owl-carousel [options]="SlideOptions" [carouselClasses]="['owl-theme', 'sliding']" [items]="matchdata">
 						<div class="item" *ngFor="let m of matchdata" style="margin-right: 30px;">
+							<a href="javascript:void(0)" [routerLink]="['/match']">
 							<div class="game-sched text-vs text-center">
 								<div class="divider"><p><span>{{m.match_name}}</span> - <span>{{m.match_date}}</span></p></div>
 								<div class="d-flex sched-wrap Game-sched-img">
@@ -144,6 +145,7 @@
 									</div>
 								</div>
 							</div>
+						</a>
               </div>
             </owl-carousel>
 	          
@@ -444,7 +446,7 @@
       </div>
     </section> -->
 
-    <section class="ftco-section">
+    <section class="ftco-section" *ngIf="isShowblog">
       <div class="container">
         <div class="row justify-content-center mb-5 pb-3">
           <div class="col-md-7 heading-section text-center ">
@@ -453,78 +455,24 @@
           </div>
         </div>
         <div class="row d-flex">
-          <div class="col-md-6 col-lg-3 ">
-          	<div class="blog-entry justify-content-end">
-              <a href="blog-single.html" class="block-20" style="background-image: url('assets/images/gameschd1.jpg');">
-              </a>
-              <div class="text mt-3 float-right d-block">
-              	<div class="d-flex align-items-center p-2 pr-3 mb-4 topp">
-              		<div class="one">
-              			<span class="day mr-1">29</span>
-              		</div>
-              		<div class="two">
-              			<span class="yr">2019</span>
-              			<span class="mos">May</span>
-              		</div>
-              	</div>
-                <h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3 ">
-          	<div class="blog-entry justify-content-end">
-              <a href="blog-single.html" class="block-20" style="background-image: url('assets/images/gameschd2.jpg');">
-              </a>
-              <div class="text mt-3 float-right d-block">
-              	<div class="d-flex align-items-center p-2 pr-3 mb-4 topp">
-              		<div class="one">
-              			<span class="day mr-1">29</span>
-              		</div>
-              		<div class="two">
-              			<span class="yr">2019</span>
-              			<span class="mos">May</span>
-              		</div>
-              	</div>
-                <h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3 ">
-          	<div class="blog-entry">
-              <a href="blog-single.html" class="block-20" style="background-image: url('assets/images/gamesch3.jpg');">
-              </a>
-              <div class="text mt-3 float-right d-block">
-              	<div class="d-flex align-items-center p-2 mb-4 topp">
-              		<div class="one">
-              			<span class="day mr-1">29</span>
-              		</div>
-              		<div class="two">
-              			<span class="yr">2019</span>
-              			<span class="mos">May</span>
-              		</div>
-              	</div>
-                <h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3 ">
-          	<div class="blog-entry">
-              <a href="blog-single.html" class="block-20" style="background-image: url('assets/images/gamesch4.jpg');">
-              </a>
-              <div class="text mt-3 float-right d-block">
-              	<div class="d-flex align-items-center p-2 pr-3 mb-4 topp">
-              		<div class="one">
-              			<span class="day mr-1">29</span>
-              		</div>
-              		<div class="two">
-              			<span class="yr">2019</span>
-              			<span class="mos">May</span>
-              		</div>
-              	</div>
-                <h3 class="heading"><a href="#">Why Lead Generation is Key for Business Growth</a></h3>
-              </div>
-            </div>
-          </div>
+			<div class="col-md-6 col-lg-3" *ngFor="let b of blogarray">
+				<div class="blog-entry justify-content-end parent">
+				<a href="javascript:void(0)" (click)="singleblog(b)" class="block-20 child" [style.background]="'url('+ b.blog_image +')'" [style.backgroundSize]="'cover'">
+				</a>
+				<div class="text mt-3 float-right d-block">
+					<div class="d-flex align-items-center p-2 pr-3 mb-4 topp">
+						<div class="one">
+							<span class="day mr-1">{{b.date}}</span>
+						</div>
+						<div class="two">
+							<span class="yr">{{b.year}}</span>
+							<span class="mos">{{b.month}}</span>
+						</div>
+					</div>
+				  <h3 class="heading"><a href="#">{{b.title}}</a></h3>
+				</div>
+			  </div>
+			</div>
         </div>
       </div>
     </section>

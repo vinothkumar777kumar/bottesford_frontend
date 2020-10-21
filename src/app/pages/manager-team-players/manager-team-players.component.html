@@ -1,22 +1,22 @@
 <div class="row">
     <div class="col-xl-12">
-      <div class="card" [ngClass]="cardClass" [@cardRemove]="cardRemove" #toAnimate>
+      <div class="card">
         <!-- animates animatesInitMode="show" [animatesOnInit]="{useVisibility: false, disabled: true}" -->
         <div class="card-header" [ngClass]="headerClass">
           <h5>Player List</h5>
-          <!-- <div class="card-header-right">
+          <div class="card-header-right">
             <div class="btn-group card-option">
-              <button type="button" class="btn btn-sm btn-info" [routerLink]="['/players-list']">
-                <i class="fa fa-times"></i>
+              <button type="button" class="btn btn-sm btn-info" [routerLink]="['/manager-addteam-players']">
+                <i class="fa fa-plus"></i>
               </button>
             </div>
-          </div> -->
+          </div>
           
         </div>
         <div>
           <div class="card-block">
             <div class="table-responsive">
-              <table class="table">
+              <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-borderd row-border hover">
                 <thead>
                   <tr>
                     <th>No</th>
@@ -25,8 +25,8 @@
                     <th>Squad No</th>
                     <th>Player Height</th>
                     <th>Country</th>
-                    <!-- <th>Edit</th> -->
-                    <!-- <th>Delete</th> -->
+                    <th>Edit</th>
+                    <th>Delete</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -45,12 +45,12 @@
                     <td>
                       {{p.country}}
                     </td>
-                    <!-- <td>
+                    <td>
                         <a href="javascript:void(0)" (click)="edit_players(p)"><i class="fa fa-edit"></i></a>
-                    </td> -->
-                    <!-- <td>
+                    </td>
+                   <td>
                         <a href="javascript:void(0)" (click)="delete_players(p)"><i class="fa fa-trash"></i></a>
-                    </td> -->
+                    </td>
                   </tr>
                   <tr *ngIf="emptyteamplayers" style="text-align: center;">
                     <td colspan="6">No Data Found</td>

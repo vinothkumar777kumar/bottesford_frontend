@@ -1,8 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TeamService } from 'src/app/dataservice/team.service';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
+import { DataTableDirective } from 'angular-datatables';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-team-list',
@@ -13,10 +15,21 @@ export class TeamListComponent implements OnInit {
   @Input() headerClass: string;
   public cardRemove: string;
   @Input() cardClass: string;
+
+  @ViewChild(DataTableDirective)
+  dtElement: DataTableDirective;
+  dtOptions: DataTables.Settings = {};
+  dtTrigger:Subject<any> = new Subject();
+
   emptyteams:boolean = false;
   teamsarray = [];
   constructor(private toastr: ToastrService,private router: Router,private tmsv:TeamService) { 
     this.getteams_data();
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 5,
+      processing: true
+    }
   }
 
   ngOnInit(): void {
@@ -33,7 +46,8 @@ this.emptyteams = true;
       data.forEach(t => {
         this.teamsarray.push({id:t.id,team_name:t.team_name,team_manager_email:t.team_manager_email,
           team_manager_name:t.team_manager_name,team_manager_mobile:t.team_manager_mobile,status:t.status});
-      })
+      });
+      this.dtTrigger.next();
     }
             }
     },error => {
@@ -94,6 +108,15 @@ this.router.navigate(['/add-team'], navigationExtras);
     })
     
   
+  }
+
+  // ngAfterViewInit(): void {
+  //   this.dtTrigger.next();
+  // }
+
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
   }
 
 }

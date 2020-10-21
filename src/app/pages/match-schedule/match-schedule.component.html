@@ -1,0 +1,51 @@
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <!-- animates animatesInitMode="show" [animatesOnInit]="{useVisibility: false, disabled: true}" -->
+            <div class="card-header" [ngClass]="headerClass">
+                <h5>Match Schedule</h5>
+                <!-- <div class="card-header-right">
+            <div class="btn-group card-option">
+              <button type="button" class="btn btn-sm btn-info" [routerLink]="['/add-match']">
+                <i class="fa fa-plus"></i>
+              </button>
+            </div>
+          </div> -->
+
+            </div>
+            <div>
+                <div class="card-block">
+                    <div class="row">
+                        <div class="col-lg-6" *ngFor="let ms of matchscheduledata;let i = index" style="margin-bottom:15px">
+                            <a href="javascript:void(0)" (click)="gotomatchscheduledetails(ms)">
+                                <div class="game-sched text-vs text-center">
+                                    <div class="divider">
+                                        <p><span>{{ms.match_name}}</span> -
+                                            <span>{{ms.match_date}}</span><span> {{ms.start_time}}</span>
+                                        </p>
+                                    </div>
+                                    <div class="d-flex sched-wrap Game-sched-img">
+                                        <span class="vs">vs</span>
+                                        <div class="team-logo text-center">
+                                            <img class="img" [src]="ms.team_one_image" />
+                                            <h3><span>{{ms.team_one}}</span></h3>
+                                        </div>
+                                        <div class="team-logo text-center">
+                                            <img class="img" [src]="ms.team_two_image" />
+                                            <h3><span>{{ms.team_two}}</span></h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="emptymatchscheduledata">
+                        <div class="col-lg-12 text-center">
+                            <p>No data found</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>

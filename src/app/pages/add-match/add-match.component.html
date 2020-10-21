@@ -23,7 +23,7 @@
   </div>
 <div class="row">
     <div class="col-xl-12">
-      <div class="card" [ngClass]="cardClass" [@cardRemove]="cardRemove" #toAnimate>
+      <div class="card">
         <!-- animates animatesInitMode="show" [animatesOnInit]="{useVisibility: false, disabled: true}" -->
         <div class="card-header" [ngClass]="headerClass">
           <h5>{{title}}</h5>
@@ -146,13 +146,54 @@
                           <div *ngIf="f.match_date.errors.required">Match is required</div>
                         </div>
                       </div>
-                      
                     </div>
                   </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="ticket_price">Ticket Price</label>
+                      <div class="input-group">
+                      <input type="text" class="form-control" id="ticket_price" name="ticket_price"
+                        formControlName="ticket_price" [ngClass]="{ 'is-invalid': submitted && f.ticket_price.errors }" (keypress)="numberOnly($event)"/>
+                        <div class="input-group-append">
+                          <span class="input-group-text">
+                            <a style="cursor: pointer;" class="fas fa-pound-sign"></a></span>
+                        </div>
+                      </div>
+                      <div *ngIf="submitted && f.ticket_price.errors" class="invalid-feedback">
+                        <div *ngIf="f.ticket_price.errors.required">Ticket Price is required</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Start Time</label>
+                        <div class='input-group'>
+                            <input type="time" class="form-control" placeholder="Start Time" formControlName="start_time" name="start_time" id="start_time" (change)="onTimeChange($event,'start_time')" [ngClass]="{ 'is-invalid': submitted && f.start_time.errors }"/>
+                            <div *ngIf="submitted && f.start_time.errors" class="invalid-feedback">
+                              <div *ngIf="f.start_time.errors.required">Start Time is required</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label>End Time</label>
+                      <div class='input-group'>
+                          <input type="time" class="form-control" placeholder="End Time" formControlName="end_time" name="end_time" id="end_time" (change)="onTimeChange($event,'end_time')" [ngClass]="{ 'is-invalid': submitted && f.end_time.errors }"/>
+                          <div *ngIf="submitted && f.end_time.errors" class="invalid-feedback">
+                            <div *ngIf="f.end_time.errors.required">End Time is required</div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+                </div>
+                <!-- <h5>Ticket price</h5>
+                <hr> -->
                 <button type="submit" class="btn btn-primary float-right" (click)="addmatch()">{{submit_action}}</button>
                 <div class="clearfix"></div>
               </form>
+              <!-- {{addMatchForm.value | json}} -->
           </div>
         </div>
         </div>

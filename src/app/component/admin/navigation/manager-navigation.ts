@@ -48,27 +48,6 @@ const ManagerNavigationItems = [
         icon: 'feather icon-user',
         classes: 'nav-item',
       },
-      // {
-      //   id: 'Team',
-      //   title: 'Teams',
-      //   type: 'collapse',
-      //   icon: 'feather icon-home',
-      //   children: [
-      //     {
-      //       id: 'team',
-      //       title: 'Team List',
-      //       type: 'item',
-      //       url: '/team-list'
-      //     },
-      //     {
-      //       id: 'player',
-      //       title: 'Player List',
-      //       type: 'item',
-      //       url: '/players-list'
-      //     }
-
-      //   ]
-      // },
       {
         id: 'match',
         title: 'Match',
@@ -76,35 +55,7 @@ const ManagerNavigationItems = [
         url: '/manager-team-matches',
         icon: 'feather icon-home',
         classes: 'nav-item',
-      },
-      // {
-      //   id: 'latest_game_result',
-      //   title: 'Games Result',
-      //   type: 'item',
-      //   url: '/games-result',
-      //   icon: 'feather icon-play',
-      //   classes: 'nav-item',
-      // },
-      // {
-      //   id: 'bookelist',
-      //   title: 'Booked list',
-      //   type: 'collapse',
-      //   icon: 'feather icon-book',
-      //   children: [
-      //     {
-      //       id: 'Ticket',
-      //       title: 'Ticket Booking',
-      //       type: 'item',
-      //       url: '/ticket-booking-list'
-      //     },
-      //     {
-      //       id: 'sportshallbook',
-      //       title: 'Sports Hall Booking',
-      //       type: 'item',
-      //       url: '/sportshall-booking-list'
-      //     }
-      //    ]
-      // }
+      }
     ]
   }
 ];

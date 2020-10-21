@@ -3,6 +3,8 @@ import {NavigationItem} from '../navigation';
 import {DattaConfig} from './../../../../app-config';
 import {Location} from '@angular/common';
 import { ManagerNavigationItem } from '../manager-navigation';
+import { Subject } from 'rxjs';
+import { NavigationEnd, Router } from '@angular/router';
 @Component({
   selector: 'app-nav-content',
   templateUrl: './nav-content.component.html',
@@ -11,6 +13,7 @@ import { ManagerNavigationItem } from '../manager-navigation';
 export class NavContentComponent implements OnInit,AfterViewInit {
   @Output() onNavCollapsedMob = new EventEmitter();
 
+  
   public dattaConfig: any;
   public navigation: any;
   public prevDisabled: string;
@@ -20,9 +23,11 @@ export class NavContentComponent implements OnInit,AfterViewInit {
   public scrollWidth: any;
   public windowWidth: number;
   session_data:any;
+  mySubscription: any;
   @ViewChild('navbarContent', {static: false}) navbarContent: ElementRef;
   @ViewChild('navbarWrapper', {static: false}) navbarWrapper: ElementRef;
-  constructor(public nav: NavigationItem, public mnav: ManagerNavigationItem, private zone: NgZone, private location: Location) {
+  constructor(public nav: NavigationItem, public mnav: ManagerNavigationItem, private zone: NgZone,
+    private location: Location,private router:Router) {
     this.session_data =  JSON.parse(sessionStorage.getItem('login_details'));
     console.log(this.session_data['role_type']);
     if(this.session_data['role_type'] == 1){
@@ -30,6 +35,7 @@ export class NavContentComponent implements OnInit,AfterViewInit {
       // this.item = NavigationItem;
     }else if(this.session_data['role_type'] == 2){
       this.navigation = this.mnav.get();
+      console.log(this.navigation);
     }
     this.dattaConfig = DattaConfig.config;
     this.windowWidth = window.innerWidth;
@@ -39,6 +45,17 @@ export class NavContentComponent implements OnInit,AfterViewInit {
     this.nextDisabled = '';
     this.scrollWidth = 0;
     this.contentWidth = 0;
+
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
+
+    this.mySubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // Trick the Router into believing it's last link wasn't previously loaded
+        this.router.navigated = false;
+      }
+    });
    }
 
   ngOnInit() {
@@ -49,6 +66,8 @@ export class NavContentComponent implements OnInit,AfterViewInit {
         (document.querySelector('#nav-ps-datta') as HTMLElement).style.maxHeight = '100%';
       }, 500);
     }
+
+    console.log(this.dattaConfig);
   }
 
   ngAfterViewInit() {
@@ -139,6 +158,10 @@ export class NavContentComponent implements OnInit,AfterViewInit {
         last_parent.classList.add('active');
       }
     }
+  }
+
+  ngOnDestroy(): void {
+    this.mySubscription.unsubscribe();
   }
 
 }

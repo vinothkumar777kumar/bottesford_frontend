@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataTableDirective } from 'angular-datatables';
 import { ToastrService } from 'ngx-toastr';
+import { Subject } from 'rxjs';
 import { MatchService } from 'src/app/dataservice/match.service';
 
 
@@ -13,10 +15,21 @@ export class TicketBookingListComponent implements OnInit {
   @Input() headerClass: string;
   public cardRemove: string;
   @Input() cardClass: string;
+
+  @ViewChild(DataTableDirective)
+  dtElement: DataTableDirective;
+  dtOptions: DataTables.Settings = {};
+  dtTrigger:Subject<any> = new Subject();
+
   emptymatchdata:boolean = false;
   matchdata = [];
   constructor(private toastr: ToastrService,private router: Router,private matsr:MatchService) {
     this.getteams_data();
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 5,
+      processing: true
+    }
   }
 
   ngOnInit(): void {
@@ -32,7 +45,8 @@ this.emptymatchdata = true;
     }else{
       data.forEach(m => {
         this.matchdata.push({id:m.id,team_one:m.team_one,team_two:m.team_two,match_name:m.match_name,round:m.round,match_date:m.match_date,});
-      })
+      });
+      this.dtTrigger.next();
     }
             }
     },error => {
@@ -55,6 +69,15 @@ this.emptymatchdata = true;
   };
 this.router.navigate(['/view-booking-list'], navigationExtras);
 
+  }
+
+  // ngAfterViewInit(): void {
+  //   this.dtTrigger.next();
+  // }
+
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
   }
 
 }

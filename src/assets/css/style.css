@@ -8052,8 +8052,8 @@ h1, h2, h3, h4, h5,
       } }
     @media (min-width: 1200px) {
       .ftco-navbar-light .container {
-        /* background: rgba(255, 255, 255, 0.1); */
-        background: rgb(131 141 212 / 10%);
+        background: rgba(255, 255, 255, 0.1);
+        /* background: rgb(131 141 212 / 10%); */
         position: relative;
         z-index: 0; }
         .ftco-navbar-light .container:after {
@@ -8063,8 +8063,9 @@ h1, h2, h3, h4, h5,
           bottom: 0;
           content: '';
           width: 100%;
-          /* background: rgba(255, 255, 255, 0.1); */
-          background: rgb(131 141 212 / 10%); }
+          background: rgba(255, 255, 255, 0.1);
+          /* background: rgb(131 141 212 / 10%); */
+         }
         .ftco-navbar-light .container:before {
           position: absolute;
           top: 0;
@@ -8254,7 +8255,7 @@ h1, h2, h3, h4, h5,
       color: #000000;
       padding-top: 1rem;
       padding-bottom: 1rem; 
-    background-color: #f2f3fb !important;
+    /* background-color: #f2f3fb !important; */
     }
       .ftco-navbar-light.scrolled .navbar-brand:before {
         top: 0;
@@ -8856,7 +8857,7 @@ h1, h2, h3, h4, h5,
   border: none; }
   .table tbody tr {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    background: #fafafa; }
+    background: #ffffff; }
     .table tbody tr td {
       border: none;
       text-transform: uppercase;
@@ -9146,7 +9147,8 @@ textarea.form-control {
 
 .ftco-section {
   padding: 6em 0;
-  position: relative; }
+  position: relative;
+background-color: #fff; }
   @media (max-width: 767.98px) {
     .ftco-section {
       padding: 6em 0; } }
@@ -9989,6 +9991,7 @@ textarea.form-control {
       border-radius: 25px;
       /* background: #6675df; */
       background: #000084;
+      outline: none !important;
     
       font-family: Montserrat-Bold;
       font-size: 12px;
@@ -10007,3 +10010,24 @@ textarea.form-control {
       background: #333333;
     }
         /* button css end */
+
+
+        /* datadable css start */
+      
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+          color: #ffffff !important;
+          border: 1px solid #000084 !important;
+          background-color: #000084 !important;
+          background: linear-gradient(to bottom, #000084 0%, #000084 100%) !important;
+          border-radius: 19px !important;
+      }
+      
+      .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+          color: white !important;
+          border: 1px solid #000084 !important;
+          background-color: #000084 !important;
+          background: linear-gradient(to bottom, #000084 0%, #000084 100%) !important;
+          border-radius: 19px !important;
+      }
+      /* datadable css end*/
+

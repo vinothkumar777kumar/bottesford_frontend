@@ -24,7 +24,7 @@
               <div class="row" *ngFor="let c of cartdata">
                   <div class="col-lg-6">
                       <div class="scoreboard scoreboard-2 slash">
-                          <div class="divider text-center mb-4"><span>{{c.matchdate}} {{c.match_name}}</span></div>
+                          <div class="divider text-center mb-4"><span>{{c.matchdate}} {{c.match_name}} {{c.start_time}}</span></div>
                           <div class="sport-team-wrap">
                               <span class="vs">vs</span>
                               <div class="d-sm-flex mb-4">
@@ -50,7 +50,7 @@
                           </div> -->
                       </div>
                   </div>
-                  <div class="col-lg-6">
+                  <div class="col-lg-5">
                     <div class="sidebar-box">
                       <h2 class="mb-4">Ticket Deatils</h2>
                       <table class="table table-league">
@@ -73,20 +73,42 @@
                           
                         </tbody>
                       </table>
-                      <div class="row">
-                        <div class="col-lg-6 text-center">
-                      <ngx-qrcode
-                            [elementType]="elementType"
-                            [errorCorrectionLevel]="correctionLevel"
-                            [value]="value"
-                            alt="Demo QR Code"
-                            cssClass="aclass" id="qrticket"></ngx-qrcode>
-                          </div>
-                          <div class="col-lg-6 text-center" style="margin: auto;">
-                            <a href="javascript:void(0)" (click)="downloadqr()" class="btn btn-black">Download QR Code</a>
-                          </div>
-                          </div>
+                      
                     </div>
+                  </div>
+                  <div class="col-lg-1">
+                    <a href="javascript:void(0)" (click)="ticketremovefromcart(c)">
+                    <i class="fa fa-trash"></i>
+                    </a>
+                  </div>
+              </div>
+              <div class="row" *ngIf="isshowticketprice">
+                <div class="col-lg-6 text-center">
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <tbody>
+                        <tr>
+                        <td>Total Tickets</td>
+                        <td>{{total_ticket}}</td>
+                      </tr>
+                      <tr>
+                        <td>Total Price</td>
+                        <td> £ {{total_price}}</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="col-lg-3 text-center">
+              <ngx-qrcode
+                    [elementType]="elementType"
+                    [errorCorrectionLevel]="correctionLevel"
+                    [value]="value"
+                    alt="Demo QR Code"
+                    cssClass="aclass" id="qrticket"></ngx-qrcode>
+                  </div>
+                  <div class="col-lg-3 text-center" style="margin: auto;">
+                    <a href="javascript:void(0)" (click)="downloadqr()" class="btn btn-black">Download QR Code</a>
                   </div>
                   <div class="col-lg-12 text-right">
                     <div class="text-center">
@@ -96,7 +118,9 @@
                   </div>
                   
                   </div>
-              </div>
+                  </div>
+                 
+                 
              
               <div class="row" *ngIf="nocartdata">
                 <div class="col-lg-12 text-center">

@@ -1,0 +1,184 @@
+<div>
+    <div class="page-header">
+      <div class="page-block">
+        <div class="row align-items-center">
+          <div class="col-md-12">
+            <div class="page-header-title">
+              <h5 class="m-b-10">Players</h5>
+            </div>
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a [routerLink]="['/dashboard/']"><i class="feather icon-home"></i></a>
+                <!-- <a [routerLink]="['/dashboard/default/']" *ngIf="type === 'theme1'">Home</a> -->
+              </li>
+              <!-- <ng-container *ngFor="let breadcrumb of navigationList"> -->
+              <li class="breadcrumb-item"><a [routerLink]="['/team-list']">Team</a></li>
+              <li class="breadcrumb-item"><a href="javascript:void(0)">{{title}}</a></li>
+              <!-- </ng-container> -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card">
+        <!-- animates animatesInitMode="show" [animatesOnInit]="{useVisibility: false, disabled: true}" -->
+        <div class="card-header" [ngClass]="headerClass">
+          <h5>{{title}}</h5>
+          <div class="card-header-right">
+            <div class="btn-group card-option">
+              <button type="button" class="btn btn-sm btn-info" [routerLink]="['/manager-team-players']">
+                <i class="fa fa-times"></i>
+              </button>
+            </div>
+          </div>
+  
+        </div>
+        <div>
+          <div class="card-block">
+            <form [formGroup]="addPlayerForm">
+              <input type="hidden" name="id" formControlName="id">
+              <div class="row">
+                <div class="col-md-6" *ngIf="imageinput">
+                  <div class="form-group">
+                    <label for="player_image">Player Image</label>
+                    <input type="file" class="form-control" id="player_image" name="player_image"
+                      formControlName="player_image" [ngClass]="{ 'is-invalid': submitted && f.player_image.errors }"
+                      (change)="fileProgress($event)" />
+                    <div *ngIf="submitted && f.player_image.errors" class="invalid-feedback">
+                      <div *ngIf="f.player_image.errors.required">Player Image is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6" *ngIf="playerimageshow">
+                  <div class="form-group">
+                    <label for="player_image">Player Image</label><br>
+                    <img src="{{playerimage_url}}" alt="image"
+                                  style="height: 100px;width: 100px;border-radius: 50%;" onerror="this.onerror=null;this.src='assets/img/smd/logo.png';"/>
+                              <button class="delete-entry btn btn-danger btn-sm" style="cursor: pointer;"
+                                  (click)="deleteplayerImage()">
+                                  Delete</button>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="player_name">Player Name</label>
+                    <input type="text" class="form-control" id="player_name" name="player_name"
+                      formControlName="player_name" [ngClass]="{ 'is-invalid': submitted && f.player_name.errors }" />
+                    <div *ngIf="submitted && f.player_name.errors" class="invalid-feedback">
+                      <div *ngIf="f.player_name.errors.required">Player Name is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="position">Position</label>
+                    <select class="form-control" id="position" name="position" formControlName="position"
+                      [ngClass]="{ 'is-invalid': submitted && f.position.errors }">
+                      <option value="" selected>Select</option>
+                      <option value="Goalkeeper">Goalkeeper</option>
+                      <option value="Right Fullback">Right Fullback</option>
+                      <option value="Left Fullback">Left Fullback</option>
+                      <option value="Center Back">Center Back</option>
+                      <option value="Center Back (or Sweeper, if used)">Center Back (or Sweeper, if used)</option>
+                      <option value="Defending/Holding Midfielder">Defending/Holding Midfielder</option>
+                      <option value="Right Midfielder/Winger">Right Midfielder/Winger</option>
+                      <option value="Central/Box-to-Box Midfielder">Central/Box-to-Box Midfielder</option>
+                      <option value="Striker">Striker</option>
+                      <option value="Attacking Midfielder/Playmaker">Attacking Midfielder/Playmaker</option>
+                      <option value="Left Midfielder/Wingers">Left Midfielder/Wingers</option>
+                    </select>
+                    <div *ngIf="submitted && f.position.errors" class="invalid-feedback">
+                      <div *ngIf="f.position.errors.required">Position is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="player_name">Squad No</label>
+                    <input type="text" class="form-control" id="squad_no" name="squad_no"
+                      formControlName="squad_no" [ngClass]="{ 'is-invalid': submitted && f.squad_no.errors }" />
+                    <div *ngIf="submitted && f.squad_no.errors" class="invalid-feedback">
+                      <div *ngIf="f.squad_no.errors.required">Squad No is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="dateofbirth">Date of Birth</label>
+                    <div class="input-group">
+                      <input angular-mydatepicker type="text" class="form-control" id="dateofbirth" name="dateofbirth"
+                        formControlName="dateofbirth" [ngClass]="{ 'is-invalid': submitted && f.dateofbirth.errors }"
+                        [options]="myDatePickerOptions" (dateChanged)="onDateChanged($event,'changedate')"
+                        #dp="angular-mydatepicker" disabled style="background-color: #fff;" />
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          <a style="cursor: pointer;" class="fa fa-calendar" (click)="dp.toggleCalendar()"></a></span>
+                      </div>
+                      <div *ngIf="submitted && f.dateofbirth.errors" class="invalid-feedback">
+                        <div *ngIf="f.dateofbirth.errors.required">Date of birth is required</div>
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="player_height">Player height</label>
+                    <input type="text" class="form-control" id="player_height" name="player_height"
+                      formControlName="player_height" [ngClass]="{ 'is-invalid': submitted && f.player_height.errors }" />
+                    <div *ngIf="submitted && f.player_height.errors" class="invalid-feedback">
+                      <div *ngIf="f.player_height.errors.required">Player height is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="signed_date">Signed Date</label>
+                    <div class="input-group">
+                      <input angular-mydatepicker type="text" class="form-control" id="signed_date" name="signed_date"
+                        formControlName="signed_date" [ngClass]="{ 'is-invalid': submitted && f.signed_date.errors }"
+                        [options]="myDatePickerOptions1" (dateChanged)="onDateChanged($event,'signeddate')"
+                        #dp1="angular-mydatepicker" disabled style="background-color: #fff;" />
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          <a style="cursor: pointer;" class="fa fa-calendar" (click)="dp1.toggleCalendar()"></a></span>
+                      </div>
+                      <div *ngIf="submitted && f.signed_date.errors" class="invalid-feedback">
+                        <div *ngIf="f.signed_date.errors.required">Signed date is required</div>
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="country">Country</label>
+                    <input type="text" class="form-control" id="country" name="country" formControlName="country"
+                      [ngClass]="{ 'is-invalid': submitted && f.country.errors }" />
+                    <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+                      <div *ngIf="f.country.errors.required">Country is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" id="description" name="description" formControlName="description"
+                      [ngClass]="{ 'is-invalid': submitted && f.description.errors }"></textarea>
+                    <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                      <div *ngIf="f.description.errors.required">Description is required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary float-right" (click)="addplayers()">{{submit_action}}</button>
+              <div class="clearfix"></div>
+            </form>
+            <!-- {{addPlayerForm.value | json}} -->
+          </div>
+        </div>
+      </div>
+    </div>

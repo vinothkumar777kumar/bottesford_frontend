@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MatchService } from 'src/app/dataservice/match.service';
 import { TeamService } from 'src/app/dataservice/team.service';
@@ -32,6 +32,7 @@ usersdata = [];
 teamsarray = [];
 matchdata = [];
 todayticketbookingdata = [];
+mySubscription: any;
   constructor(private toastr: ToastrService,private router: Router,private matsr:MatchService,
     private tmsv:TeamService) {
     setTimeout(() => {
@@ -46,6 +47,17 @@ todayticketbookingdata = [];
     setTimeout(() => {
       this.gettodayticketbooking_data();
     },1000);
+
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
+
+    this.mySubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // Trick the Router into believing it's last link wasn't previously loaded
+        this.router.navigated = false;
+      }
+    });
    }
 
   ngOnInit() {
@@ -161,6 +173,14 @@ this.upcommingmatchcount = 0;
      }
      
     })
+  }
+
+  gotouserlist(){
+    this.router.navigateByUrl('/users-list');
+  }
+
+  ngOnDestroy(): void {
+    this.mySubscription.unsubscribe();
   }
     
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { TeamService } from 'src/app/dataservice/team.service';
 
@@ -17,12 +18,23 @@ export class ManagerDashboardComponent implements OnInit {
   playerscount = 0;
 playedmatch = 0;
 winmatch = 0;
-  constructor(private toastr: ToastrService,private tmsv:TeamService) { 
+sessionstorage = [];
+mySubscription: any;
+  constructor(private toastr: ToastrService,private tmsv:TeamService,private router:Router) { 
     this.logininfo = JSON.parse(sessionStorage.getItem('login_details'));
     setTimeout(() => {
       this.getplayers_data(this.logininfo['user_id']);
     },2000);
-    
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
+
+    this.mySubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // Trick the Router into believing it's last link wasn't previously loaded
+        this.router.navigated = false;
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -39,6 +51,7 @@ this.playerscount = 0;
 this.playedmatch = 0;
 this.winmatch = 0;
     }else{
+      localStorage.setItem('team_id',data.team_id);
       if ( data.totalplayer != null) { this.playerscount = data.totalplayer; }
       if ( data.playedmatch != null) { this.playedmatch = data.playedmatch; }
       if ( data.winmatch != null) { this.winmatch = data.winmatch; }
@@ -56,6 +69,10 @@ this.winmatch = 0;
      }
      
     })
+  }
+
+  ngOnDestroy(): void {
+    this.mySubscription.unsubscribe();
   }
 
 }

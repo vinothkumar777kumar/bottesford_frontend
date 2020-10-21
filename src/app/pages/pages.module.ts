@@ -29,11 +29,15 @@ import { AddBlogComponent } from './add-blog/add-blog.component';
 import { ViewSingleBlogComponent } from './view-single-blog/view-single-blog.component';
 import { BlogSingleComponent } from './blog-single/blog-single.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { MatchScheduleComponent } from './match-schedule/match-schedule.component';
+import { MatchScheduleDetailsComponent } from './match-schedule-details/match-schedule-details.component';
+import { ManagerAddteamPlayersComponent } from './manager-addteam-players/manager-addteam-players.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 
 @NgModule({
-  declarations: [AdminLoginComponent, AdminDashboardComponent, HallDetailComponent, AddTeamComponent, AddPlayersComponent, TeamListComponent, PlayersListComponent, ViewPlayersComponent, TeamPlayersComponent, PlayerDetailsComponent, MatchListComponent, AddMatchComponent, SportsHallBookingComponent, UsersListComponent, TicketBookingListComponent, SportshallBookingListComponent, ViewBookingListComponent, GamesResultComponent, AddGameResultComponent, MoreinfoLatestgameResultComponent, ManagerSignUpComponent, ManagerDashboardComponent, ManagerTeamPlayersComponent, ManagerTeamMatchesComponent, BlogListComponent, AddBlogComponent, ViewSingleBlogComponent, BlogSingleComponent, ResetPasswordComponent],
+  declarations: [AdminLoginComponent, AdminDashboardComponent, HallDetailComponent, AddTeamComponent, AddPlayersComponent, TeamListComponent, PlayersListComponent, ViewPlayersComponent, TeamPlayersComponent, PlayerDetailsComponent, MatchListComponent, AddMatchComponent, SportsHallBookingComponent, UsersListComponent, TicketBookingListComponent, SportshallBookingListComponent, ViewBookingListComponent, GamesResultComponent, AddGameResultComponent, MoreinfoLatestgameResultComponent, ManagerSignUpComponent, ManagerDashboardComponent, ManagerTeamPlayersComponent, ManagerTeamMatchesComponent, BlogListComponent, AddBlogComponent, ViewSingleBlogComponent, BlogSingleComponent, ResetPasswordComponent, MatchScheduleComponent, MatchScheduleDetailsComponent, ManagerAddteamPlayersComponent, ChangePasswordComponent],
   imports: [
     CommonModule
   ]

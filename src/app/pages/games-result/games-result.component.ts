@@ -1,9 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MatchService } from 'src/app/dataservice/match.service';
 import Swal from 'sweetalert2';
 import * as moment from 'moment';
+import { DataTableDirective } from 'angular-datatables';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-games-result',
@@ -14,10 +16,21 @@ export class GamesResultComponent implements OnInit {
   @Input() headerClass: string;
   public cardRemove: string;
   @Input() cardClass: string;
+
+  @ViewChild(DataTableDirective)
+  dtElement: DataTableDirective;
+  dtOptions: DataTables.Settings = {};
+  dtTrigger:Subject<any> = new Subject();
+
   gamesresultdata = [];
   emptygamesresultdata:boolean = false;
   constructor(private toastr: ToastrService,private router: Router,private matsr:MatchService) {
     this.getgamesresult_data();
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 5,
+      processing: true
+    }
    }
 
   ngOnInit(): void {
@@ -39,7 +52,8 @@ this.emptygamesresultdata = true;
           match_name:m.match_name,round:m.round,match_date:m.match_date,team_one_goal:m.team_one_goal,
           team_two_goal:m.team_two_goal});
         // }
-      })
+      });
+      this.dtTrigger.next();
     }
             }
     },error => {
@@ -102,8 +116,15 @@ this.router.navigate(['/add-game-result'], navigationExtras);
         this.router.navigateByUrl('/games-result');
       }
     })
-    
-  
+  }
+
+  // ngAfterViewInit(): void {
+  //   this.dtTrigger.next();
+  // }
+
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
   }
 
 }

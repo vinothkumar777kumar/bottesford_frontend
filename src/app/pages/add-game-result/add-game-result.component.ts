@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import {IAngularMyDpOptions, IMyDateModel, IMyCalendarViewChanged, IMyRangeDateSelection, AngularMyDatePickerDirective} from 'angular-mydatepicker';
 import { MatchService } from 'src/app/dataservice/match.service';
+import { error } from 'protractor';
 
 @Component({
   selector: 'app-add-game-result',
@@ -121,6 +122,14 @@ public myDatePickerOptions: IAngularMyDpOptions = {
         this.addMatchResultForm.controls['team_two_goal'].setValue(data.team_two_goal);
         this.addMatchResultForm.controls['video_url'].setValue(data.video_url);
       }
+    },error => {
+      if(error['status'] == 401){
+        let er = error['error'];
+        this.toastr.error(er.message, er.error, {
+          progressBar:true
+        });
+        return;
+      }
     });
     });
      }
@@ -132,16 +141,16 @@ public myDatePickerOptions: IAngularMyDpOptions = {
    // convenience getter for easy access to form fields
    get f() { return this.addMatchResultForm.controls; }
 
-  getteams_data(){
-    this.matsr.getdata('getallmatch').then(res => {
+   getteams_data(){
+    this.matsr.getdata('getteams').then(res => {
       console.log(res);
       if(res['status'] == 'success'){
     let data = res['data'];
     if(data == ''){
 // this.emptyteams = true;
     }else{
-      data.forEach(m=> {
-        this.teamsarray.push({id:m.id,team_one:m.team_one,team_two:m.team_two,match_name:m.match_name,round:m.round,match_date:m.match_date});
+      data.forEach(t => {
+        this.teamsarray.push({id:t.id,team_name:t.team_name,status:t.status});
       })
     }
             }
@@ -214,7 +223,13 @@ public myDatePickerOptions: IAngularMyDpOptions = {
           }
     },error => {
       this.ngxService.stop();
-      console.log(error);
+      if(error['status'] == 401){
+        let er = error['error'];
+        this.toastr.error(er.message, er.error, {
+          progressBar:true
+        });
+        return;
+      }
     });
       }else{
         let matchd = this.addMatchResultForm.value.match_date;
@@ -254,7 +269,13 @@ public myDatePickerOptions: IAngularMyDpOptions = {
           }
     },error => {
       this.ngxService.stop();
-      console.log(error);
+      if(error['status'] == 401){
+        let er = error['error'];
+        this.toastr.error(er.message, er.error, {
+          progressBar:true
+        });
+        return;
+      }
     });
       }
  

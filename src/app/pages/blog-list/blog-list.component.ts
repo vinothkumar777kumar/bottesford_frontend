@@ -1,6 +1,8 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input,OnDestroy, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataTableDirective } from 'angular-datatables';
 import { ToastrService } from 'ngx-toastr';
+import { Subject } from 'rxjs';
 import { BlogService } from 'src/app/dataservice/blog.service';
 import Swal from 'sweetalert2';
 @Component({
@@ -8,13 +10,20 @@ import Swal from 'sweetalert2';
   templateUrl: './blog-list.component.html',
   styleUrls: ['./blog-list.component.css']
 })
-export class BlogListComponent implements OnInit {
+export class BlogListComponent implements OnDestroy, OnInit {
+  
   @Input() headerClass: string;
   public cardRemove: string;
   @Input() cardClass: string;
+
+  @ViewChild(DataTableDirective)
+  dtElement: DataTableDirective;
+  dtOptions: DataTables.Settings = {};
+  dtTrigger:Subject<any> = new Subject();
+
   blogarray = [];
   emptyblogarray:boolean = false;
-  constructor(private toastr: ToastrService,private router: Router,private blogs:BlogService) { 
+  constructor(private toastr: ToastrService,private router: Router,private blogs:BlogService) {
     this.getblog_data();
   }
 
@@ -22,6 +31,10 @@ export class BlogListComponent implements OnInit {
   }
 
   getblog_data(){
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 5
+    }
     this.blogs.getblog('getallblog').then(res => {
       console.log(res);
       if(res['status'] == 'success'){
@@ -32,7 +45,9 @@ this.emptyblogarray = true;
       data.forEach(b => {
         this.blogarray.push({id:b.id,title:b.title,publish_date:b.publish_date,
           status:b.status});
-      })
+      });
+      this.dtTrigger.next();
+  
     }
             }
     },error => {
@@ -95,5 +110,23 @@ this.router.navigate(['/add-blog'], navigationExtras);
     
   
   }
+
+  // ngAfterViewInit(): void {
+  //   this.dtTrigger.next();
+  // }
+
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
+  }
+
+  // rerender(): void {
+  //   this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+  //     // Destroy the table first
+  //     dtInstance.destroy();
+  //     // Call the dtTrigger to rerender again
+  //     this.dtTrigger.next();
+  //   });
+  // }
 
 }

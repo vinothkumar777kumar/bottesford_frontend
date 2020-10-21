@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataserviceService } from 'src/app/dataservice/dataservice.service';
 
 @Component({
   selector: 'app-basiclayout',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BasiclayoutComponent implements OnInit {
 
-  constructor() { }
+  constructor(private ds: DataserviceService) { }
 
   ngOnInit(): void {
+    this.ds.scrollToTop(200);
   }
 
 }

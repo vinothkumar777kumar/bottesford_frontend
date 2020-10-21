@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-xl-12">
-      <div class="card" [ngClass]="cardClass" [@cardRemove]="cardRemove" #toAnimate>
+      <div class="card">
         <!-- animates animatesInitMode="show" [animatesOnInit]="{useVisibility: false, disabled: true}" -->
         <div class="card-header" [ngClass]="headerClass">
           <h5>Games Result</h5>
@@ -16,7 +16,7 @@
         <div>
           <div class="card-block">
             <div class="table-responsive">
-              <table class="table">
+              <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-borderd row-border hover">
                 <thead>
                   <tr>
                     <th>No</th>

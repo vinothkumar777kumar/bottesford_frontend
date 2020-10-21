@@ -24,7 +24,7 @@
         <div class="row">
           <div class="col-lg-6" *ngFor="let m of matchdata">
               <div class="scoreboard scoreboard-2 slash">
-                  <div class="divider text-center mb-4"><span>{{m.match_date}} {{m.match_name}}</span></div>
+                  <div class="divider text-center mb-4"><span>{{m.match_date}} {{m.match_name}} {{m.start_time}}</span></div>
                   <div class="sport-team-wrap">
                       <span class="vs">vs</span>
                       <div class="d-sm-flex mb-4">
@@ -46,7 +46,8 @@
                       </div>
                   </div>
                   <div class="text-center">
-                      <p class="mb-0"><a href="javascript:void(0)" (click)="buyticket(m)" class="btn btn-black">Buy Ticket</a></p>
+                      <span class="mb-0"><a href="javascript:void(0)" (click)="buyticket(m)" class="btn btn-black">Buy Ticket</a></span>
+                      <span class="mb-0"><a href="javascript:void(0)" (click)="gotocart()" class="btn btn-black">Go to Cart</a></span>
                   </div>
               </div>
           </div>

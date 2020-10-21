@@ -23,7 +23,11 @@ import { ManagerTeamMatchesComponent } from 'src/app/pages/manager-team-matches/
 import { ManagerTeamPlayersComponent } from 'src/app/pages/manager-team-players/manager-team-players.component';
 import { BlogListComponent } from 'src/app/pages/blog-list/blog-list.component';
 import { AddBlogComponent } from 'src/app/pages/add-blog/add-blog.component';
-
+import { MatchScheduleComponent } from 'src/app/pages/match-schedule/match-schedule.component';
+import { MatchScheduleDetailsComponent } from 'src/app/pages/match-schedule-details/match-schedule-details.component';
+import { DataTablesModule } from 'angular-datatables';
+import { ManagerAddteamPlayersComponent } from 'src/app/pages/manager-addteam-players/manager-addteam-players.component';
+import { ChangePasswordComponent } from 'src/app/pages/change-password/change-password.component';
 
 
 
@@ -33,12 +37,13 @@ import { AddBlogComponent } from 'src/app/pages/add-blog/add-blog.component';
     AddPlayersComponent,ViewPlayersComponent,MatchListComponent,AddMatchComponent,UsersListComponent,
     TicketBookingListComponent,SportshallBookingListComponent,ViewBookingListComponent,GamesResultComponent,
     AddGameResultComponent,ManagerDashboardComponent,ManagerTeamMatchesComponent,ManagerTeamPlayersComponent,
-    BlogListComponent,AddBlogComponent
+    BlogListComponent,AddBlogComponent,MatchScheduleComponent,MatchScheduleDetailsComponent,ManagerAddteamPlayersComponent,
+    ChangePasswordComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
-    SharedModule,AngularMyDatePickerModule
+    SharedModule,AngularMyDatePickerModule,DataTablesModule
   ]
 })
 export class AdminlayoutModule { }

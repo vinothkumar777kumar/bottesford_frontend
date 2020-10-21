@@ -77,6 +77,14 @@ const NavigationItems = [
         icon: 'feather icon-home',
         classes: 'nav-item',
       },
+         {
+        id: 'match-schedule',
+        title: 'Match Schedule',
+        type: 'item',
+        url: '/match-schedule',
+        icon: 'feather icon-home',
+        classes: 'nav-item',
+      },
       {
         id: 'blog',
         title: 'Blog',

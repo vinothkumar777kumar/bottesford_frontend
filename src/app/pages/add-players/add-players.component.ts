@@ -42,7 +42,7 @@ playerimage_url:any;
     disableUntil: {day: 1,month: 1,year: 1985}
   };
   constructor(private toastr: ToastrService,private ngxService: NgxUiLoaderService,private router: Router,
-    private tmsv:TeamService,private fb: FormBuilder,private Activate: ActivatedRoute,) { 
+    private tmsv:TeamService,private fb: FormBuilder,private Activate: ActivatedRoute) { 
       this.addPlayerForm = this.fb.group({
         id:[''],
         team_name:['',Validators.required],

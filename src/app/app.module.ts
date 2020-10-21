@@ -10,7 +10,6 @@ import { LocationStrategy, PathLocationStrategy, HashLocationStrategy } from '@a
 import { NgxUiLoaderModule, NgxUiLoaderConfig, POSITION, SPINNER, PB_DIRECTION } from 'ngx-ui-loader';
 import { AuthlayoutModule } from './layout/authlayout/authlayout.module';
 import { AuthlayoutComponent } from './layout/authlayout/authlayout.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminauthlayoutComponent } from './layout/adminauthlayout/adminauthlayout.component';
 import { NavContentComponent } from './component/admin/navigation/nav-content/nav-content.component';
 import { NavItemComponent } from './component/admin/navigation/nav-content/nav-item/nav-item.component';
@@ -32,7 +31,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { AdminauthlayoutModule } from './layout/adminauthlayout/adminauthlayout.module';
 import { AdminlayoutModule } from './layout/adminlayout/adminlayout.module';
 import { ManagerNavigationItem } from './component/admin/navigation/manager-navigation';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 // import { SharedModule } from './theme/shared/shared.module';
 
 
@@ -62,12 +61,12 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     AuthlayoutModule,
     HttpClientModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
-    BrowserAnimationsModule,
     SharedModule,
     OwlModule,
     NgbDropdownModule,NgbButtonsModule,NgbTabsetModule,NgbTooltipModule,
     AdminauthlayoutModule,
-    AdminlayoutModule
+    AdminlayoutModule,
+    BrowserAnimationsModule
   ],
   providers: [Location,{provide:LocationStrategy,useClass:PathLocationStrategy},NavigationItem,ManagerNavigationItem],
   bootstrap: [AppComponent]

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { CartService } from 'src/app/dataservice/cart.service';
 import { TeamService } from 'src/app/dataservice/team.service';
+
 // declare interface RouteInfo {
 //   path: string;
 //   title: string;
@@ -56,7 +58,8 @@ export class BasicHeaderComponent implements OnInit {
   public menuItems: any[];
   logininfo:any;
   emptyteamarray:boolean = false;
-  constructor(private tmsv:TeamService,private toastr: ToastrService,private router: Router) { 
+  constructor(private tmsv:TeamService,private toastr: ToastrService,private router: Router,
+    private carts: CartService) { 
     this.logininfo = JSON.parse(sessionStorage.getItem('login_details'));
     if(!this.logininfo){
       this.menuItems = ROUTES.filter(menuItem => menuItem);  
@@ -70,13 +73,26 @@ export class BasicHeaderComponent implements OnInit {
     
     if(cart_session_data != undefined){
     cart_session_data.forEach(d => {
-      this.cartdata.push({match_type:d.match_type,matchdate:d.matchdate,team_one:d.team_one,team_one_img:d.team_one_img,
-        team_two:d.team_two,team_two_img:d.team_two_img,ticket:d.ticket,ticket_price:d.ticket_price})
+      this.cartdata.push({match_type:d.match_type,matchdate:d.matchdate,team_one:d.team_one,team_one_image:d.team_one_image,
+        team_two:d.team_two,team_two_image:d.team_two_image,ticket:d.ticket,ticket_price:d.ticket_price})
     });
+    this.cartlength = this.cartdata.length;
   }
   }
 
   ngOnInit(): void {
+    this.carts.ordersChanged.subscribe(res => {
+      console.log(res);
+      this.cartdata = [];
+      res.forEach(d => {
+        this.cartdata.push({match_type:d.match_type,matchdate:d.matchdate,team_one:d.team_one,
+          team_one_image:d.team_one_image,
+          team_two:d.team_two,team_two_image:d.team_two_image,ticket:d.ticket,ticket_price:d.ticket_price})
+      });
+      this.cartlength = this.cartdata.length;
+      // console.log(this.cartdata);
+      // console.log(res);
+    })
   }
 
   getteams_data(){

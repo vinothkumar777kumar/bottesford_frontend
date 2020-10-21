@@ -47,7 +47,7 @@
                       <select class="form-control" id="team_one" name="team_one" formControlName="team_one"
                         [ngClass]="{ 'is-invalid': submitted && f.team_one.errors }">
                         <option value="" selected>Select Team</option>
-                        <option *ngFor="let t of teamsarray" [value]="t.team_one">{{t.team_one}}</option>
+                        <option *ngFor="let t of teamsarray" [value]="t.team_name">{{t.team_name}}</option>
                       </select>
                       <div *ngIf="submitted && f.team_one.errors" class="invalid-feedback">
                         <div *ngIf="f.team_one.errors.required">Team One is required</div>
@@ -81,7 +81,7 @@
                       <select class="form-control" id="team_two" name="team_two" formControlName="team_two"
                         [ngClass]="{ 'is-invalid': submitted && f.team_two.errors }">
                         <option value="" selected>Select Team</option>
-                        <option *ngFor="let t of teamsarray" [value]="t.team_two">{{t.team_two}}</option>
+                        <option *ngFor="let t of teamsarray" [value]="t.team_name">{{t.team_name}}</option>
                       </select>
                       <div *ngIf="submitted && f.team_two.errors" class="invalid-feedback">
                         <div *ngIf="f.team_two.errors.required">Team Two is required</div>

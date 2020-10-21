@@ -2,6 +2,7 @@ import {Component, Input, NgZone, OnInit} from '@angular/core';
 import {NavigationItem} from '../../navigation';
 import {DattaConfig} from './../../../../../app-config';
 import {Location} from '@angular/common';
+import { ManagerNavigationItem } from '../../manager-navigation';
 
 @Component({
   selector: 'app-nav-item',
@@ -9,12 +10,24 @@ import {Location} from '@angular/common';
   styleUrls: ['./nav-item.component.css']
 })
 export class NavItemComponent implements OnInit {
-  @Input() item: NavigationItem;
+  @Input() item: any;
   public dattaConfig: any;
   public themeLayout: string;
+  session_data:any;
   constructor(private location: Location) {
     this.dattaConfig = DattaConfig.config;
     this.themeLayout = this.dattaConfig['layout'];
+    this.session_data =  JSON.parse(sessionStorage.getItem('login_details'));
+    // console.log(this.nav.get());
+    console.log(this.session_data['role_type']);
+    if(this.session_data['role_type'] == 1){
+      this.item = NavigationItem;
+      // this.item = this.nav.get();
+    }else if(this.session_data['role_type'] == 2){
+      this.item = ManagerNavigationItem;
+      // this.item = this.mnav.get();
+      // console.log(this.navigation);
+    }
    }
 
   ngOnInit(): void {

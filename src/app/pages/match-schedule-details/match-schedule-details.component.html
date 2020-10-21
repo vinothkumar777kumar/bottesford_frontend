@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card" [ngClass]="cardClass" [@cardRemove]="cardRemove" #toAnimate>
+            <!-- animates animatesInitMode="show" [animatesOnInit]="{useVisibility: false, disabled: true}" -->
+            <div class="card-header" [ngClass]="headerClass">
+                <h5>Match Schedule</h5>
+                <div class="card-header-right">
+                    <div class="btn-group card-option">
+                        <button type="button" class="btn btn-sm btn-info" [routerLink]="['/match-schedule']">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <div class="card-block">
+                    <!-- <div class="table-responsive"> -->
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td colspan="5">
+                                        <div class="game-sched text-vs text-center">
+                                            <div class="divider">
+                                                <p><span>{{singlematchdata.match_name}}</span> -
+                                                    <span>{{singlematchdata.match_date}}</span><span>
+                                                        {{singlematchdata.start_time}}</span>
+                                                </p>
+                                            </div>
+                                            <div class="d-flex sched-wrap Game-sched-img">
+                                                <span class="vs">vs</span>
+                                                <div class="team-logo text-center">
+                                                    <img class="img" [src]="singlematchdata.team_one_image" onerror="this.onerror=null;this.src='assets/images/BottesfordTown_logo.png';"/>
+                                                    <h3><span>{{singlematchdata.team_one}}</span></h3>
+                                                </div>
+                                                <div class="team-logo text-center">
+                                                    <img class="img" [src]="singlematchdata.team_two_image" onerror="this.onerror=null;this.src='assets/images/BottesfordTown_logo.png';"/>
+                                                    <h3><span>{{singlematchdata.team_two}}</span></h3>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Team</th>
+                                    <th>MP</th>
+                                    <th>W</th>
+                                    <th>L</th>
+                                    <th>D</th>
+                                </tr>
+
+
+                                <tr *ngFor="let lt of filterleagetable">
+                                    <td>{{lt.team}}</td>
+                                    <td>{{lt.mp}}</td>
+                                    <td>{{lt.win_match}}</td>
+                                    <td>{{lt.loss}}</td>
+                                    <td>{{lt.draw}}</td>
+                                </tr>
+                                <tr *ngIf="emptyleaguetable">
+                                    <td colspan="5" class="text-center">No Data Found</td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    <!-- </div> -->
+                </div>
+            </div>
+        </div>
+    </div>

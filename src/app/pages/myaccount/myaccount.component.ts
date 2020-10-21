@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MyaccountService } from 'src/app/dataservice/myaccount.service';
 import { DataserviceService } from 'src/app/dataservice/dataservice.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { error } from 'protractor';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import { DataTableDirective } from 'angular-datatables';
+import { Subject } from 'rxjs';
+
 
 declare global {
   interface Window {
@@ -18,6 +21,11 @@ declare global {
   styleUrls: ['./myaccount.component.css']
 })
 export class MyaccountComponent implements OnInit {
+  @ViewChild(DataTableDirective)
+  dtElement: DataTableDirective;
+  dtOptions: DataTables.Settings = {};
+  dtTrigger:Subject<any> = new Subject();
+
   submitted:boolean = false;
   logininfo;
   myaccountForm: FormGroup;
@@ -29,7 +37,27 @@ export class MyaccountComponent implements OnInit {
   
   constructor(private acs: MyaccountService,private ds: DataserviceService,private router: Router,
     private toastr: ToastrService,private fb: FormBuilder) {
-    this.logininfo = JSON.parse(sessionStorage.getItem('login_details'));
+      this.logininfo = JSON.parse(sessionStorage.getItem('login_details'));
+      this.myaccountForm = this.fb.group({
+        id:[''],
+        name:['',Validators.required],
+        email:['',Validators.required],
+        address_one:['',Validators.required],
+        postcode:['',Validators.required],
+        mobile:['',Validators.required],
+        town:['',Validators.required]
+      })
+      this.changepasswordForm = this.fb.group({
+        user_id:[this.logininfo['user_id']],
+        current_password:['',Validators.required],
+        new_password:['',[Validators.required,Validators.pattern(/^(?=.*[A-Z])(?=.*[!@#\$%\^&\*])(?=.{9,})/)]],
+        confirm_password:['',Validators.required],
+      })
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 5,
+      processing: true
+    }
     if(!this.logininfo){
       this.router.navigateByUrl('/login')
     }
@@ -59,21 +87,7 @@ export class MyaccountComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.myaccountForm = this.fb.group({
-      id:[''],
-      name:['',Validators.required],
-      email:['',Validators.required],
-      address_one:['',Validators.required],
-      postcode:['',Validators.required],
-      mobile:['',Validators.required],
-      town:['',Validators.required]
-    })
-    this.changepasswordForm = this.fb.group({
-      user_id:[this.logininfo['user_id']],
-      current_password:['',Validators.required],
-      new_password:['',[Validators.required,Validators.pattern(/^(?=.*[A-Z])(?=.*[!@#\$%\^&\*])(?=.{9,})/)]],
-      confirm_password:['',Validators.required],
-    })
+   
   }
 
      // convenience getter for easy access to form fields
@@ -119,7 +133,8 @@ this.nomytickets = true;
     }else{
       data.forEach(t => {
         this.myticketsarray.push({id:t.id,username:t.name,match_type:t.match_type,matchdate:t.matchdate,team_one:t.team_one,team_two:t.team_two,ticket:t.ticket,ticket_price:t.ticket_price});
-      })
+      });
+      this.dtTrigger.next();
     }
             }
     },error => {
@@ -218,6 +233,11 @@ if(this.changepasswordForm.invalid){
     }
     return true;
 
+  }
+
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
   }
 
 }

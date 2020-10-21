@@ -9,7 +9,7 @@ import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { TeamPlayersComponent } from 'src/app/pages/team-players/team-players.component';
 import { MyaccountComponent } from 'src/app/pages/myaccount/myaccount.component';
 import { CartComponent } from 'src/app/pages/cart/cart.component';
-
+import { DataTablesModule } from 'angular-datatables';
 
 
 
@@ -20,7 +20,7 @@ import { CartComponent } from 'src/app/pages/cart/cart.component';
   declarations: [TeamPlayersComponent,MyaccountComponent,CartComponent],
   imports: [
     CommonModule,ReactiveFormsModule,FormsModule,RouterModule,NgbModule,ToastrModule.forRoot(),
-    AuthLayoutRoutingModule,NgxQRCodeModule
+    AuthLayoutRoutingModule,NgxQRCodeModule,DataTablesModule
   ]
 })
 export class AuthlayoutModule { }
